@@ -535,57 +535,57 @@ Use o comando ${prefix}menu para listar meus comandos
             } else if (nivelAtual === 15) {
                 patt = 'Ouro V🥇'
             } else if (nivelAtual === 16) {
-                patt = 'Platinum I🏆'
+                patt = 'Campeão I🏆'
             } else if (nivelAtual === 17) {
-                patt = 'Platinum II🏆'
+                patt = 'Campeão II🏆'
             } else if (nivelAtual === 18) {
-                patt = 'Platinum III🏆'
+                patt = 'Campeão III🏆'
             } else if (nivelAtual === 19) {
-                patt = 'Platinum IV🏆'
+                patt = 'Campeão IV🏆'
             } else if (nivelAtual === 20) {
-                patt = 'Platinum V🏆'
+                patt = 'Campeão V🏆'
             } else if (nivelAtual === 21) {
-                patt = 'Demon I 💎'
+                patt = 'Diamante I 💎'
             } else if (nivelAtual === 22) {
-                patt = 'Demon II 💎'
+                patt = 'Diamante II 💎'
             } else if (nivelAtual === 23) {
-                patt = 'Demon III 💎'
+                patt = 'Diamante III 💎'
             } else if (nivelAtual === 24) {
-                patt = 'Demon IV 💎'
+                patt = 'Diamante IV 💎'
             } else if (nivelAtual === 25) {
-                patt = 'Demon V 💎'
+                patt = 'Diamante V 💎'
             } else if (nivelAtual === 26) {
-                patt = 'Angel I 🐂'
+                patt = 'Mestre I 🐂'
             } else if (nivelAtual === 27) {
-                patt = 'Angel II 🐂'
+                patt = 'Mestre II 🐂'
             } else if (nivelAtual === 28) {
-                patt = 'Angel III 🐂'
+                patt = 'Mestre III 🐂'
             } else if (nivelAtual === 29) {
-                patt = 'Angel IV 🐂'
+                patt = 'Mestre IV 🐂'
             } else if (nivelAtual === 30) {
-                patt = 'Angel V 🐂'
+                patt = 'Mestre V 🐂'
             } else if (nivelAtual === 31) {
-                patt = 'GOD I 🔮'
+                patt = 'Mítico I 🔮'
             } else if (nivelAtual === 32) {
-                patt = 'GOD II 🔮'
+                patt = 'Mítico II 🔮'
             } else if (nivelAtual === 33) {
-                patt = 'GOD III 🔮'
+                patt = 'Mítico III 🔮'
             } else if (nivelAtual === 34) {
-                patt = 'GOD IV 🔮'
+                patt = 'Mítico IV 🔮'
             } else if (nivelAtual === 35) {
-                patt = 'GOD V 🔮'
+                patt = 'Mítico V 🔮'
             } else if (nivelAtual === 36) {
-                patt = 'DEVIL I🕴'
+                patt = 'God I🕴'
             } else if (nivelAtual === 37) {
-                patt = 'DEVIL II🕴'
+                patt = 'God II🕴'
             } else if (nivelAtual === 38) {
-                patt = 'DEVIL III🕴'
+                patt = 'God III🕴'
             } else if (nivelAtual === 39) {
-                patt = 'DEVIL IV🕴'
+                patt = 'God IV🕴'
             } else if (nivelAtual === 40) {
-                patt = 'DEVIL V🕴'
+                patt = 'God V🕴'
             } else if (nivelAtual >= 41) {
-                patt = '🛐HAIL SATAN🛐'
+                patt = '🛐Grande Mestre🛐'
             }
 
             //_TIPO DE USUÁRIO
@@ -833,15 +833,15 @@ Use o comando ${prefix}menu para listar meus comandos
                 }
           /*      if (testat === "fdp") {
                     tiringa.updatePresence(from, Presence.composing)
-                    reply("modere essa linguagem preto")
+                    reply("teu pai")
                 }
                 if (testat === "oi bot") {
                     tiringa.updatePresence(from, Presence.composing)
-                    reply("oi membro")
+                    reply("oi")
                 }
-              if (testat === "vtmnc") {
+              if (testat === "vtnc") {
                     tiringa.updatePresence(from, Presence.composing)
-                    reply("gosta?")
+                    reply("Tomar no cu é vitamina, como você e suas primas")
                 }
                 if (testat === "vsfd") {
                     tiringa.updatePresence(from, Presence.composing)
@@ -849,13 +849,13 @@ Use o comando ${prefix}menu para listar meus comandos
                 }
                 if (anun.match("sexo")) {
                     tiringa.updatePresence(from, Presence.composing)
-                    reply(`sexo nazal`)
+                    reply(`você falou em coito?KKKKKKKKKKKKKKKKKKKKKKKKK`)
                 }
                 if (testat === "pnc") {
                     tiringa.updatePresence(from, Presence.composing)
-                    reply(`morra ${pushname}`)
+                    reply(`vsfd ${pushname}`)
                 }
-              if (testat.match('h0nda')) {
+              if (testat.match('tiringa')) {
                         result = fs.readFileSync(`./src/mask.webp`)
                         tiringa.sendMessage(from, result, sticker, {
                             quoted: mek
@@ -907,71 +907,71 @@ Use o comando ${prefix}menu para listar meus comandos
             if (isGroup && isZ24) {
                 switch (testat) {
                     //_ COMANDOS Z24
-                    case 'fwfwefhw':
+                    case 'lia':
                         reply('L-Lia-chan???😳👉👈')
                         break
-                    case 'dekdkdwkw':
+                    case 'eat':
                         reply('Ala o maluco que gosta de poesia acústicaKKKKKKKKK')
                         break
-                    case 'bwwkfwjjewtc':
+                    case 'braia':
                         reply('Lek do rabão gostoso😋')
                         break
-                    case 'wdjdqwtfgay':
+                    case 'gil':
                         reply('Me obrigue a fazer figuras G-gilson-chan 😔👉👈')
                         break
-                    case 'seuxsackwo':
+                    case 'edu':
                         reply('Oin dudu, poderia depositar R$3,000 na minha conta?🥺👉👈')
                         break
-                    case 'dewdktyuo':
+                    case 'insidu':
                         reply('Ó o cp nisto mn!!! kkkkkkkk')
                         break
-                    case 'kdkaowtfdude':
+                    case 'xavoso':
                         reply('Vamos fuck?💪😏')
                         break
-                    case 'tadmasgh':
+                    case 'tada':
                         reply('Tada não é ghost😙')
                         break
-                    case 'gugdqjdqjdq':
+                    case 'guga':
                         reply('O cara que é ignorado pra krl sem nenhummotivo🤧🤧\nMó gente boa🤙')
                         break
-                    case 'lifnsnvnnr':
+                    case 'liar':
                         reply('querem ver meus sapos?😍😍🤧💗💝😍💕😍💖💓🤧🤧💝😍💖🤧💖💞🤧💘💕😍💖')
                         break
-                    case 'egvbcnuio':
+                    case 'ed':
                         reply('Poesia acústica 3938933839373873 já lançou man?')
                         break
-                    case 'assowqpzxzm':
+                    case 'fox':
                         reply('a terra é um ovo')
                         break
-                    case 'ofeamnajdawdq':
+                    case 'gil':
                         reply('Quem gosta de trap não é gay, é apenas um hetero de bom gosto😔🤙')
                         break
-                    case 'dakdwadqq':
+                    case 'thai':
                         reply('vo chorakk😭😭')
                         break
-                    case 'wdqjdjq':
+                    case 'lu':
                         reply('melhor adm🙄🤙')
                         break
-                    case 'viruyuwwfuni':
-                        reply('kdqdkqdk3q')
+                    case 'vini':
+                        reply('sou pirocakkkkkkk😎')
                         break
-                    case 'patorttttttlino':
+                    case 'patolino':
                         reply('Famoso pica de bambuKSKSKSKSKSKSKSS')
                         break
-                    case 'keyhhht':
+                    case 'keyt':
                         reply('jaré do krai🐊')
                         break
-                    case 'jeooojdjqjdjqdlado':
+                    case 'jelado':
                         reply('fica frio aíkkkkkkkkk🥶🥶🥶')
                         break
-                    case 'braddwdwiasp':
+                    case 'braiasp':
                         reply('queria estar assim:\n☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️')
                         break
-                    case 'thaitrygaswii':
-                    case 'thcfnsjaii':
+                    case 'thaiii':
+                    case 'thaii':
                         reply('Linda, fofa, perfeita😍💗💝😍💗💓💞💝💘💖💗💞😍💝💘💗💗🤧💝💖😭💘💓💖😭💞💗💘')
                         break
-                    case 'bxdslaliel':
+                    case 'biel':
                         reply('Cara de pastel')
                         break
                     case 'dg':
@@ -1029,7 +1029,7 @@ Use o comando ${prefix}menu para listar meus comandos
                 case 'help':
                 case 'menu':
                 case '?':
-                case 'h0ndamenu':
+                case 'ajuda':
                 case 'comandos':
                     const useLevel = getLevelingLevel(sender)
                     const useXp = getLevelingXp(sender)
@@ -1566,7 +1566,7 @@ Link: ${i.swipeUpLink}\n\n𝗜𝗚 𝗦𝗧𝗢𝗥𝗬\n`
                     break
                  
                  case 'baiano':
-             const baiano = `351927438657@s.whatsapp.net`
+             const baiano = `557499510904@s.whatsapp.net`
                     const tame = {
                         text: `@${baiano.split("@")[0]} `,
                         contextInfo: {
@@ -1655,7 +1655,7 @@ reply(teks)
                     }
                     break
 
-                case 'gerarncick': //BY KRATO OF KIBES
+                case 'gerarnick': //BY KRATO OF KIBES
                     teksl = body.slice(10)
                     send = await fetchJson(`http://brizas-api.herokuapp.com/gerador/fancytext?apikey=brizaloka&text=${teksl}`)
                     teks = `✅ NICKS PERSONALIZADOS ✅
@@ -1714,7 +1714,7 @@ LISTA RANDOM:
                     addFilter(from)
                     break
 
-                case 'roubarksi':
+                case 'take':
                     var namaPackss = q.substring(0, q.indexOf('|') - 0)
                     var authorPackss = q.substring(q.lastIndexOf('|') + 1)
                     stiker_wm = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
@@ -2217,7 +2217,7 @@ e upar seu level
                             })
                             .on('end', function() {
                                 console.log('Finish')
-                                exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
+                                exec(`webpmux -set exif ${addMetadata('Tiringa-BOT', 'Italu Dev')} ${ran} -o ${ran}`, async(error) => {
                                     if (error) return reply(ptbr.stick())
                                     tiringa.sendMessage(from, fs.readFileSync(ran), sticker, {
                                         quoted: mek
@@ -2248,7 +2248,7 @@ e upar seu level
                             .on('end', function() {
                                 console.log('Finish')
                                 buff = fs.readFileSync(ran)
-                                exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
+                                exec(`webpmux -set exif ${addMetadata('Tiringa-BOT', 'Italu Dev')} ${ran} -o ${ran}`, async(error) => {
                                     if (error) return reply(ptbr.stick())
                                     tiringa.sendMessage(from, buff, sticker, {quoted: mek})
                                     fs.unlinkSync(media)
@@ -2281,7 +2281,7 @@ e upar seu level
                             })
                             .on('end', function() {
                                 console.log('Finish')
-                                exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
+                                exec(`webpmux -set exif ${addMetadata('Tiringa-BOT', 'Italu Dev')} ${ran} -o ${ran}`, async(error) => {
                                     if (error) return reply(ptbr.stick())
                                     tiringa.sendMessage(from, fs.readFileSync(ran), sticker, {
                                         quoted: mek
@@ -2311,7 +2311,7 @@ e upar seu level
                             })
                             .on('end', function() {
                                 console.log('Finish')
-                                exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
+                                exec(`webpmux -set exif ${addMetadata('Tiringa-BOT', 'Italu Dev')} ${ran} -o ${ran}`, async(error) => {
                                     if (error) return reply(ptbr.stick())
                                     tiringa.sendMessage(from, fs.readFileSync(ran), sticker, {
                                         quoted: mek
@@ -2345,7 +2345,7 @@ e upar seu level
                             })
                         exec(`ffmpeg -i ${media} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 800:800 ${rano}`, (err) => {
                             fs.unlinkSync(media)
-                            exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${rano} -o ${rano}`, async(error) => {
+                            exec(`webpmux -set exif ${addMetadata('Tiringa-BOT', 'Italu Dev')} ${rano} -o ${rano}`, async(error) => {
                                 buffer = fs.readFileSync(rano)
                                 tiringa.sendMessage(from, buffer, sticker, {
                                     quoted: mek
@@ -2370,7 +2370,7 @@ e upar seu level
                             })
                         exec(`ffmpeg -i ${media} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 200:200 ${rano}`, (err) => {
                             fs.unlinkSync(media)
-                            exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${rano} -o ${rano}`, async(error) => {
+                            exec(`webpmux -set exif ${addMetadata('Tiringa-BOT', 'Italu Dev')} ${rano} -o ${rano}`, async(error) => {
                                 buffer = fs.readFileSync(rano)
                                 tiringa.sendMessage(from, buffer, sticker, {
                                     quoted: mek
@@ -2528,7 +2528,7 @@ e upar seu level
                             mentionedJid: [sender]
                         },
                     }
-                    tiringa.sendMessage('351927438657@s.whatsapp.net', options, text, {
+                    tiringa.sendMessage('557499510904@s.whatsapp.net', options, text, {
                         quoted: mek
                     })
                     reply("Mensagem enviada ao meu dono; Spam = block + ban.")
@@ -2542,7 +2542,7 @@ e upar seu level
                             method: 'get'
                         })
                         if (anu.error) return reply('Não sei ler o que não existe 🐤 (converse cmg)')
-                        if (anu.success == "Limit 500 queries per hour.") return reply('Limite atingido... \nTente novamente mais tarde')
+                        if (anu.success == "Limit 50 queries per hour.") return reply('Limite atingido... \nTente novamente mais tarde')
                         tiringa.sendMessage(from, `${anu.success} 🐤`, text, {
                             quoted: mek
                         })
@@ -2708,10 +2708,10 @@ e upar seu level
                 case 'criador':
                 case 'vcard':
                 case 'owner':
-                case 'honda':
-                case 'h0nda':
+                case 'italu':
+                case 'italo':
                     await tiringa.sendMessage(from, {
-                        displayname: "h0nda",
+                        displayname: "Italu🧙‍♂️",
                         vcard: vcard
                     }, MessageType.contact)
                     addFilter(from)
