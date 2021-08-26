@@ -110,45 +110,45 @@ const ZeksKey = "adquira a sua no site https://zeks.xyz/"
 
 //_VCARD DONO DO BOT
 const vcard = 'BEGIN:VCARD\n' +
-    'VersãoON:1.0\n' +
-    'FN:h0nda\n' +
-    'ORG:Dono do h0nda bot;\n' +
-    'TEL;type=CELL;type=VOICE;waid=351927438657:+351 927 438 657\n' +
+    'VersãoON:3.0\n' +
+    'FN:Italu🧙‍♂️\n' +
+    'ORG:Dono do Tiringa;\n' +
+    'TEL;type=CELL;type=VOICE;waid=557499510904:+55 (74) 9951-0904\n' +
     'END:VCARD'
 
     //_CONEXÃO WHATSAPP WEB 
 async function starts() {
-    const h0nda = new WAConnection()
-// h0nda.logger.level = 'debug'
-//  h0nda.logger.level = 'trace'
-    h0nda.logger.level = 'warn'
+    const tiringa = new WAConnection()
+// tiringa.logger.level = 'debug'
+//  tiringa.logger.level = 'trace'
+    tiringa.logger.level = 'warn'
     console.log(banner.string)
     console.log(banner2.string)
-    h0nda.on('qr', () => {
-        console.log(color('👆'), color(' Faça um scan no código acima para iniciar o h0nda-BOT!'))
+    tiringa.on('qr', () => {
+        console.log(color('👆'), color(' Escanear o código acima para iniciar o Tiringa-BOT!'))
     })
-    fs.existsSync('./h0nda.json') && h0nda.loadAuthInfo('./h0nda.json')
-    h0nda.on('connecting', () => {
-        start('2', 'Conectando o h0nda-bot...')
+    fs.existsSync('./tiringa.json') && tiringa.loadAuthInfo('./tiringa.json')
+    tiringa.on('connecting', () => {
+        start('2', 'Conectando o Tiringa-BOT...')
     })
-    h0nda.on('open', () => {
-            success('2', 'h0nda-bot conectado!!!')
+    tiringa.on('open', () => {
+            success('2', 'Tiringa-BOT conectado!!!')
         })
           
-    await h0nda.connect({
+    await tiringa.connect({
         timeoutMs: 30 * 1000
     })
-    fs.writeFileSync('./h0nda.json', JSON.stringify(h0nda.base64EncodedAuthInfo(), null, '\t'))
+    fs.writeFileSync('./tiringa.json', JSON.stringify(tiringa.base64EncodedAuthInfo(), null, '\t'))
 
-    h0nda.on('group-participants-update', async(anu) => {
-mdata = await h0nda.groupMetadata(anu.jid)
+    tiringa.on('group-participants-update', async(anu) => {
+mdata = await tiringa.groupMetadata(anu.jid)
 if(antifake.includes(anu.jid)) {
 if (anu.action == 'add'){
 num = anu.participants[0]
 if(!num.split('@')[0].startsWith(55)) {
-h0nda.sendMessage(mdata.id, 'Números fake's não são permitidos neste grupo', MessageType.text)
+tiringa.sendMessage(mdata.id, 'Números fake não são permitidos nesse grupo', MessageType.text)
 setTimeout(async function () {
-h0nda.groupRemove(mdata.id, [num])
+tiringa.groupRemove(mdata.id, [num])
 					}, 3000)
 				}
 			}
@@ -158,51 +158,51 @@ h0nda.groupRemove(mdata.id, [num])
             mem = anu.participants[0]
             console.log(anu)
             try {
-                pp_user = await h0nda.getProfilePicture(mem)
+                pp_user = await tiringa.getProfilePicture(mem)
             } catch (e) {
                 pp_user = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
             }
             try {
-                pp_grup = await h0nda.getProfilePicture(anu.jid)
+                pp_grup = await tiringa.getProfilePicture(anu.jid)
             } catch (e) {
                 pp_grup = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
             }
             if (anu.action == 'demote') {
               if(!x9.includes(anu.jid)) return 
-                mdata = await h0nda.groupMetadata(anu.jid)
+                mdata = await tiringa.groupMetadata(anu.jid)
                 member = mdata.participants.length
                 num = anu.participants[0]
-                anu_user = h0nda.contacts[mem]
+                anu_user = tiringa.contacts[mem]
                 teks = `MEMBRO REBAIXADO\n\n@${num.split('@')[0]} foi rebaixado a membro comum...`
-                h0nda.sendMessage(mdata.id, teks, MessageType.text, {
+                tiringa.sendMessage(mdata.id, teks, MessageType.text, {
                     contextInfo: {
                         "mentionedJid": [num]
                     }
                 })
             }
             if (anu.action == 'promote') {
-            mdata = await h0nda.groupMetadata(anu.jid)
+            mdata = await tiringa.groupMetadata(anu.jid)
             if(!x9.includes(anu.jid)) return
             member = mdata.participants.length
         	num = anu.participants[0]
-            anu_user = h0nda.contacts[mem]
-            teks = `@${num.split('@')[0]} agora é um administrador do grupo!`
-	          h0nda.sendMessage(mdata.id, teks, MessageType.text, { contextInfo: {"mentionedJid": [num]}})
+            anu_user = tiringa.contacts[mem]
+            teks = `@${num.split('@')[0]} foi promovido a administrador do grupo!`
+	          tiringa.sendMessage(mdata.id, teks, MessageType.text, { contextInfo: {"mentionedJid": [num]}})
 		}
             if (anu.action == 'add') {
-                mdata = await h0nda.groupMetadata(anu.jid)
+                mdata = await tiringa.groupMetadata(anu.jid)
                 member = mdata.participants.length
                 num = anu.participants[0]
-                anu_user = h0nda.contacts[mem]
+                anu_user = tiringa.contacts[mem]
                 teks = `Olá @${num.split('@')[0]}!!
-Bem-vindo(a) ao grupo ${mdata.subject}! Dê uma olhada nas regras do grupo para evitar ser banido!
+Bem-vindo(a) ao grupo ${mdata.subject}! Olhe as regras do grupo para não ser banido 
 
 Use o comando ${prefix}menu para listar meus comandos
  
-h0nda-BOT`
+𒊹︎︎︎Tiringa-BOT©`
                 buff = await getBuffer(`http://hadi-api.herokuapp.com/api/card/welcome2?nama=${encodeURI(anu_user.notify)}&descriminator=${member}&memcount=${member}&gcname=${encodeURI(mdata.subject)}&gcicon=${pp_grup}&pp=${pp_user}&bg=https://c4.wallpaperflare.com/wallpaper/128/375/582/katana-kimetsu-no-yaiba-ultrawide-hd-wallpaper-preview.jpg`)
 
-                h0nda.sendMessage(mdata.id, buff, MessageType.image, {
+                tiringa.sendMessage(mdata.id, buff, MessageType.image, {
                     caption: teks,
                     contextInfo: {
                         "mentionedJid": [num]
@@ -210,13 +210,13 @@ h0nda-BOT`
                 })
             }
             if (anu.action == 'remove') {
-                mdata = await h0nda.groupMetadata(anu.jid)
+                mdata = await tiringa.groupMetadata(anu.jid)
                 num = anu.participants[0]
-                anu_user = h0nda.contacts[mem]
+                anu_user = tiringa.contacts[mem]
                 member = mdata.participants.length
-                out = `Adeus XD @${num.split('@')[0]} 👋`
+                out = `Bye Bye @${num.split('@')[0]} 👋`
                 buff = await getBuffer(`http://hadi-api.herokuapp.com/api/card/goodbye2?nama=${encodeURI(anu_user.notify)}&descriminator=${member}&memcount=${member}&gcname=${encodeURI(mdata.subject)}&gcicon=${pp_grup}&pp=${pp_user}&bg=https://c4.wallpaperflare.com/wallpaper/128/375/582/katana-kimetsu-no-yaiba-ultrawide-hd-wallpaper-preview.jpg`)
-                h0nda.sendMessage(mdata.id, buff, MessageType.image, {
+                tiringa.sendMessage(mdata.id, buff, MessageType.image, {
                     caption: out,
                     contextInfo: {
                         "mentionedJid": [num]
@@ -228,31 +228,31 @@ h0nda-BOT`
         }
     })
 
-    h0nda.on('CB:Blocklist', json => {
+    tiringa.on('CB:Blocklist', json => {
         if (blocked.length > 2) return
         for (let i of json[1].blocklist) {
             blocked.push(i.replace('c.us', 's.whatsapp.net'))
         }
     })
 
-    h0nda.on('CB:action,,call', async json => {
+    tiringa.on('CB:action,,call', async json => {
         const callerId = json[2][0][1].from;
         console.log("LIGAÇÃO DE" + callerId)
-        h0nda.sendMessage(callerId, "Ligações = block", MessageType.text)
+        tiringa.sendMessage(callerId, "Ligações = block", MessageType.text)
         setTimeout(async() => {
-            await h0nda.blockUser(callerId, "add")
+            await tiringa.blockUser(callerId, "add")
         }, 4000)
     })
 
-    h0nda.on('group-update', async(chat) => {
+    tiringa.on('group-update', async(chat) => {
         console.log(chat)
         var from = chat.jid
-        var group = await h0nda.groupMetadata(from)
+        var group = await tiringa.groupMetadata(from)
       	if(!x9.includes(chat.jid)) return 
         if (!chat.desc == '') {
             var tag = chat.descOwner.split('@')[0] + '@s.whatsapp.net'
-            var teks = `- [ Alteração na descrição do grupo ] -\n\n Descrição do grupo alterada por: @${chat.descOwner.split('@')[0]}\nNova descrição: ${chat.desc}`
-            h0nda.sendMessage(group.id, teks, MessageType.text, {
+            var teks = `- [ Alteração na descrição do grupo ] -\n\n Descrição alterada por: @${chat.descOwner.split('@')[0]}\nNova descrição: ${chat.desc}`
+            tiringa.sendMessage(group.id, teks, MessageType.text, {
                 contextInfo: {
                     "mentionedJid": [tag]
                 }
@@ -261,7 +261,7 @@ h0nda-BOT`
         }
     })
   
-  h0nda.on('blocklist-update', async (chat) => {
+  tiringa.on('blocklist-update', async (chat) => {
     for (i of chat.added){
        // console.log(color("LISTA DE USUÁRIOS BLOQUEADOS", "blue"))
         target = i.replace('@c.us', '@s.whatsapp.net')
@@ -274,25 +274,25 @@ h0nda-BOT`
         console.log(color("[ DESBLOQUEADO ] ", 'green')+target)
     }
     })
-  h0nda.on('CB:action,,battery', json => {
+  tiringa.on('CB:action,,battery', json => {
 		global.batteryLevelStr = json[2][0][1].value
 	   global.batterylevel = parseInt(batteryLevelStr)
 		baterai = batterylevel
         if (json[2][0][1].live == 'true') charging = true
        if (json[2][0][1].live == 'false') charging = false
         console.log(json[2][0][1])
-		console.log(color('🔋Porcentagem de bateria: ' + batterylevel+'%', "yellow"))
+		console.log(color('🔋Carga da bateria: ' + batterylevel+'%', "yellow"))
 	})
-	h0nda.on('close', async () => {
-  if (h0nda.state == 'close') {
-  h0nda.logger.error('Reconectando...')
-    await h0nda.loadAuthInfo('./h0nda.json')
-    await h0nda.connect()
+	tiringa.on('close', async () => {
+  if (tiringa.state == 'close') {
+  tiringa.logger.error('Reconectando...')
+    await tiringa.loadAuthInfo('./tiringa.json')
+    await tiringa.connect()
     global.timestamp.connect = new Date
   }
 })
 	
-    h0nda.on('chat-update', async(mek) => {
+    tiringa.on('chat-update', async(mek) => {
         try {
             if (!mek.hasNewMessage) return
             mek = mek.messages.all()[0]
@@ -335,17 +335,17 @@ h0nda-BOT`
             const tescuk = ["0@s.whatsapp.net"]
             const arrayQND = ['Hoje', 'Amanhã', 'Nunca', 'dia', 'semana', 'mês', 'ano']
             const arrayQND2 = ['dias', 'semanas', 'meses', 'anos']
-            const botNumber = h0nda.user.jid
+            const botNumber = tiringa.user.jid
             const ownerNumber = [`557499510904@s.whatsapp.net`, `557499896089@s.whatsapp.net`]
             const liaN = [`0@s.whatsapp.net`]
             const ownerNumberB = [`557499510904@s.whatsapp.net`]
             const isGroup = mek.key.remoteJid.endsWith('@g.us') ? true : false
-            sender = mek.key.fromMe ? h0nda.user.jid : mek.key.remoteJid.endsWith('@g.us') ? mek.participant : mek.key.remoteJid
-            conts = mek.key.fromMe ? h0nda.user.jid : h0nda.contacts[sender] || {
+            sender = mek.key.fromMe ? tiringa.user.jid : mek.key.remoteJid.endsWith('@g.us') ? mek.participant : mek.key.remoteJid
+            conts = mek.key.fromMe ? tiringa.user.jid : tiringa.contacts[sender] || {
                 notify: jid.replace(/@.+/, '')
             }
 	    const jid = sender
-            let pushname = mek.key.fromMe ? h0nda.user.name : conts.notify || conts.vname || conts.name || '-'
+            let pushname = mek.key.fromMe ? tiringa.user.name : conts.notify || conts.vname || conts.name || '-'
             const senderNumber = sender.split("@")[0]
             const mentionByTag = type == "extendedTextMessage" && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.mentionedJid : []
             const mentionByReply = type == "extendedTextMessage" && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.participant || "" : ""
@@ -353,7 +353,7 @@ h0nda-BOT`
             mention != undefined ? mention.push(mentionByReply) : []
             const mentionUser = mention != undefined ? mention.filter(n => n) : []
             hitt.push(command)
-            const groupMetadata = isGroup ? await h0nda.groupMetadata(from) : ''
+            const groupMetadata = isGroup ? await tiringa.groupMetadata(from) : ''
             const groupName = isGroup ? groupMetadata.subject : ''
             const groupId = isGroup ? groupMetadata.jid : ''
             const groupMembers = isGroup ? groupMetadata.participants : ''
@@ -379,7 +379,7 @@ h0nda-BOT`
           
             const groupOwner = `${from.split('-')[0]}@s.whatsapp.net`
             const isGroupOwner = groupOwner.includes(sender)
-            totalchat = await h0nda.chats.all()
+            totalchat = await tiringa.chats.all()
             const isPremium = isOwner ? true : checkPremiumUser(sender, premium)
 	          const isBan = cekBannedUser(sender, ban)
 	
@@ -392,26 +392,26 @@ h0nda-BOT`
                 return url.match(new RegExp(/http?:\/\/?https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
             }
             const fakethumb = (jej, yes) => {
-                h0nda.sendMessage(from, jej, image, {
+                tiringa.sendMessage(from, jej, image, {
                     thumbnail: fs.readFileSync('./src/bot.jpg'),
                     quoted: mek,
                     caption: yes
                 })
             }
             const reply = (teks) => {
-                h0nda.sendMessage(from, teks, text, {
+                tiringa.sendMessage(from, teks, text, {
                     quoted: mek
                 })
             }
             const sendMess = (hehe, teks) => {
-                h0nda.sendMessage(hehe, teks, text)
+                tiringa.sendMessage(hehe, teks, text)
             }
             const mentions = (teks, memberr, id) => {
-                (id == null || id == undefined || id == false) ? h0nda.sendMessage(from, teks.trim(), extendedText, {
+                (id == null || id == undefined || id == false) ? tiringa.sendMessage(from, teks.trim(), extendedText, {
                     contextInfo: {
                         "mentionedJid": memberr
                     }
-                }): h0nda.sendMessage(from, teks.trim(), extendedText, {
+                }): tiringa.sendMessage(from, teks.trim(), extendedText, {
                     quoted: mek,
                     contextInfo: {
                         "mentionedJid": memberr
@@ -419,7 +419,7 @@ h0nda-BOT`
                 })
             }
             const costum = (pesan, tipe, target, target2) => {
-                h0nda.sendMessage(from, pesan, tipe, {
+                tiringa.sendMessage(from, pesan, tipe, {
                     quoted: {
                         key: {
                             fromMe: false,
@@ -435,12 +435,12 @@ h0nda-BOT`
                 })
             }
             const sendPtt = (poi) => {
-                h0nda.sendMessage(from, audio, mp3, {
+                tiringa.sendMessage(from, audio, mp3, {
                     quoted: mek
                 })
             }
             const sendGif = (from, gif) => {
-                h0nda.sendMessage(from, gif, MessageType.video, {
+                tiringa.sendMessage(from, gif, MessageType.video, {
                     mimetype: "video/gif"
                 })
             }
@@ -448,13 +448,13 @@ h0nda-BOT`
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
             const sendImage = (tis) => {
-                h0nda.sendMessage(from, tis, image, {
+                tiringa.sendMessage(from, tis, image, {
                     quoted: mek
                 })
             }
        
             const replyimg = (pesan, tipe, rep1, rep2) => {
-                h0nda.sendMessage(from, pesan, tipe, {
+                tiringa.sendMessage(from, pesan, tipe, {
                     quoted: {
                         key: {
                             fromMe: false,
@@ -476,7 +476,7 @@ h0nda-BOT`
             }
             
             const costumimg = ( pesan , tipe, target , caption) => {
-			h0nda.sendMessage(from, pesan , tipe , {quoted: { key: { fromMe: false, participant: `${target}`, ...(from ? { remoteJid: from } : {}) }, message: {"imageMessage":{url: 'https://mmg.whatsapp.net/d/f/Ahj0ACnTjSHHm6-HjqAUBYiCu2-85zMZp_-EhiXlsd6A.enc',mimetype: 'image/jpeg',caption: `${caption}`,fileSha256: '0Pk0qJyQFn9FCtslZrydJHRQDKryjYcdP7I3CmRrHRs=',fileLength: '20696',height: 360,width: 382,mediaKey: 'N43d/3GY7GYQpgBymb9qFY5O9iNDXuBirXsNZk+X61I=',fileEncSha256: 'IdFM58vy8URV+IUmOqAY3OZsvCN6Px8gaJlRCElqhd4=',directPath: '/v/t62.7118-24/35174026_475909656741093_8174708112574209693_n.enc?oh=2a690b130cf8f912a9ca35f366558743&oe=6061F0C6',mediaKeyTimestamp: '1614240917',jpegThumbnail: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABsbGxscGx4hIR4qLSgtKj04MzM4PV1CR0JHQl2NWGdYWGdYjX2Xe3N7l33gsJycsOD/2c7Z//////////////8BGxsbGxwbHiEhHiotKC0qPTgzMzg9XUJHQkdCXY1YZ1hYZ1iNfZd7c3uXfeCwnJyw4P/Zztn////////////////CABEIAEMASAMBIgACEQEDEQH/xAAwAAADAAMBAAAAAAAAAAAAAAAABAUBAwYCAQADAQEAAAAAAAAAAAAAAAABAgMABP/aAAwDAQACEAMQAAAAoy6kcWS2eH8miq17B553Thh1BgyTY9iULYfndGBmbSwNEV3eWXpjwZElG09WJckXCj8sWBVc1ZKXj2ZYaoWHnc67K3PbKwtZOqzLrzdQAg5fWFRUeCNTQG2pEKJ0wCD/xAAoEAACAgIBAQkAAwEAAAAAAAABAgADBBEScQUQEyEiMTJBYSNRYmP/2gAIAQEAAT8AaZzfEdwWcGMTE1jNv3M1ozDb+SD2jTO+Yigk6A3KqhseIdfkroTYbXQRrkVuJOplKEuOpjtpxF+IjTO+YnZoBvj4pa/msHtMnHZrgymZ6hCnSJsDl+ys7rTpGmevxMwLFS/1fcA7iNzPsDXaH1NccYH+2lJ1SnSNMlOdcbY6iYGa9g4OJzXW9zI7SBJrpjqxsA9zMkcMetf2V7NKD/McgAkxsis7EcA2fkxkqSkaYbMGRu3hr0x6q6ckufaUMpsexj0ma4Y0qDKhqlektyntXiQO4qWI0PONVZWNsNTmZwewekEwo1fpYaMZdvWf2DYrXoO/ARWLNL6VuXiYcSsuK9eXGYtHhM/nsTPVQgb7iDkydRCNBYYx1Ozj6nmSStRIgJ8UH/nMJiTZs/c7RPwExhu+vrH+p//EAB4RAAIBBAMBAAAAAAAAAAAAAAABAhAREjIhMDFC/9oACAECAQE/AOpJsxEqIj4TfNqXygIWpLc+ZEdBH//EAB4RAAICAgIDAAAAAAAAAAAAAAABAjEQETJBAxJx/9oACAEDAQE/AHWVeHQtYrDaNkno7GOzxP10xzWipDHZHidx+EuQz//Z',scansSidecar: 'choizTOCOFXo21QcOR/IlCehTFztHGnB3xo4F4d/kwmxSJJIbMmvxg==',scanLengths: [Array],midQualityFileSha256: '68OHK4IyhiKDNgNAZ3SoXsngzYENebQkV4b/RwhhYIY=',midQualityFileEncSha256: '2EYOLCXx+aqg9RyP6xJYChQNbEjXZmc0EcSwHzoyXx0='}}}})
+			tiringa.sendMessage(from, pesan , tipe , {quoted: { key: { fromMe: false, participant: `${target}`, ...(from ? { remoteJid: from } : {}) }, message: {"imageMessage":{url: 'https://mmg.whatsapp.net/d/f/Ahj0ACnTjSHHm6-HjqAUBYiCu2-85zMZp_-EhiXlsd6A.enc',mimetype: 'image/jpeg',caption: `${caption}`,fileSha256: '0Pk0qJyQFn9FCtslZrydJHRQDKryjYcdP7I3CmRrHRs=',fileLength: '20696',height: 360,width: 382,mediaKey: 'N43d/3GY7GYQpgBymb9qFY5O9iNDXuBirXsNZk+X61I=',fileEncSha256: 'IdFM58vy8URV+IUmOqAY3OZsvCN6Px8gaJlRCElqhd4=',directPath: '/v/t62.7118-24/35174026_475909656741093_8174708112574209693_n.enc?oh=2a690b130cf8f912a9ca35f366558743&oe=6061F0C6',mediaKeyTimestamp: '1614240917',jpegThumbnail: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABsbGxscGx4hIR4qLSgtKj04MzM4PV1CR0JHQl2NWGdYWGdYjX2Xe3N7l33gsJycsOD/2c7Z//////////////8BGxsbGxwbHiEhHiotKC0qPTgzMzg9XUJHQkdCXY1YZ1hYZ1iNfZd7c3uXfeCwnJyw4P/Zztn////////////////CABEIAEMASAMBIgACEQEDEQH/xAAwAAADAAMBAAAAAAAAAAAAAAAABAUBAwYCAQADAQEAAAAAAAAAAAAAAAABAgMABP/aAAwDAQACEAMQAAAAoy6kcWS2eH8miq17B553Thh1BgyTY9iULYfndGBmbSwNEV3eWXpjwZElG09WJckXCj8sWBVc1ZKXj2ZYaoWHnc67K3PbKwtZOqzLrzdQAg5fWFRUeCNTQG2pEKJ0wCD/xAAoEAACAgIBAQkAAwEAAAAAAAABAgADBBEScQUQEyEiMTJBYSNRYmP/2gAIAQEAAT8AaZzfEdwWcGMTE1jNv3M1ozDb+SD2jTO+Yigk6A3KqhseIdfkroTYbXQRrkVuJOplKEuOpjtpxF+IjTO+YnZoBvj4pa/msHtMnHZrgymZ6hCnSJsDl+ys7rTpGmevxMwLFS/1fcA7iNzPsDXaH1NccYH+2lJ1SnSNMlOdcbY6iYGa9g4OJzXW9zI7SBJrpjqxsA9zMkcMetf2V7NKD/McgAkxsis7EcA2fkxkqSkaYbMGRu3hr0x6q6ckufaUMpsexj0ma4Y0qDKhqlektyntXiQO4qWI0PONVZWNsNTmZwewekEwo1fpYaMZdvWf2DYrXoO/ARWLNL6VuXiYcSsuK9eXGYtHhM/nsTPVQgb7iDkydRCNBYYx1Ozj6nmSStRIgJ8UH/nMJiTZs/c7RPwExhu+vrH+p//EAB4RAAIBBAMBAAAAAAAAAAAAAAABAhAREjIhMDFC/9oACAECAQE/AOpJsxEqIj4TfNqXygIWpLc+ZEdBH//EAB4RAAICAgIDAAAAAAAAAAAAAAABAjEQETJBAxJx/9oACAEDAQE/AHWVeHQtYrDaNkno7GOzxP10xzWipDHZHidx+EuQz//Z',scansSidecar: 'choizTOCOFXo21QcOR/IlCehTFztHGnB3xo4F4d/kwmxSJJIbMmvxg==',scanLengths: [Array],midQualityFileSha256: '68OHK4IyhiKDNgNAZ3SoXsngzYENebQkV4b/RwhhYIY=',midQualityFileEncSha256: '2EYOLCXx+aqg9RyP6xJYChQNbEjXZmc0EcSwHzoyXx0='}}}})
 			}
 			
 			async function sendFileFromUrl(from, url, caption, mek, men) {
@@ -495,10 +495,10 @@ h0nda-BOT`
             if(mime.split("/")[0] === "audio"){
                 mime = Mimetype.mp4Audio
             }
-            return h0nda.sendMessage(from, await getBuffer(url), type, {caption: caption, quoted: mek, mimetype: mime, contextInfo: {"mentionedJid": men ? men : []}})
+            return tiringa.sendMessage(from, await getBuffer(url), type, {caption: caption, quoted: mek, mimetype: mime, contextInfo: {"mentionedJid": men ? men : []}})
         }
         const textImg = (teks) => {
-            return h0nda.sendMessage(from, teks, text, {quoted: mek, thumbnail: fs.readFileSync(setting.pathImg)})
+            return tiringa.sendMessage(from, teks, text, {quoted: mek, thumbnail: fs.readFileSync(setting.pathImg)})
         }
 
             //_FUCTION PATENTE
@@ -545,58 +545,58 @@ h0nda-BOT`
             } else if (nivelAtual === 20) {
                 patt = 'Platinum V🏆'
             } else if (nivelAtual === 21) {
-                patt = 'Champion I 💎'
+                patt = 'Demon I 💎'
             } else if (nivelAtual === 22) {
-                patt = 'Champion II 💎'
+                patt = 'Demon II 💎'
             } else if (nivelAtual === 23) {
-                patt = 'Champion III 💎'
+                patt = 'Demon III 💎'
             } else if (nivelAtual === 24) {
-                patt = 'Champion IV 💎'
+                patt = 'Demon IV 💎'
             } else if (nivelAtual === 25) {
-                patt = 'Champion V 💎'
+                patt = 'Demon V 💎'
             } else if (nivelAtual === 26) {
-                patt = 'Champion I 🐂'
+                patt = 'Angel I 🐂'
             } else if (nivelAtual === 27) {
-                patt = 'Legendary II 🐂'
+                patt = 'Angel II 🐂'
             } else if (nivelAtual === 28) {
-                patt = 'Legendary III 🐂'
+                patt = 'Angel III 🐂'
             } else if (nivelAtual === 29) {
-                patt = 'Legendary IV 🐂'
+                patt = 'Angel IV 🐂'
             } else if (nivelAtual === 30) {
-                patt = 'Legendary V 🐂'
+                patt = 'Angel V 🐂'
             } else if (nivelAtual === 31) {
-                patt = 'Global I 🔮'
+                patt = 'GOD I 🔮'
             } else if (nivelAtual === 32) {
-                patt = 'Global II 🔮'
+                patt = 'GOD II 🔮'
             } else if (nivelAtual === 33) {
-                patt = 'Global III 🔮'
+                patt = 'GOD III 🔮'
             } else if (nivelAtual === 34) {
-                patt = 'Global IV 🔮'
+                patt = 'GOD IV 🔮'
             } else if (nivelAtual === 35) {
-                patt = 'Global V 🔮'
+                patt = 'GOD V 🔮'
             } else if (nivelAtual === 36) {
-                patt = 'God I🕴'
+                patt = 'DEVIL I🕴'
             } else if (nivelAtual === 37) {
-                patt = 'God II🕴'
+                patt = 'DEVIL II🕴'
             } else if (nivelAtual === 38) {
-                patt = 'God III🕴'
+                patt = 'DEVIL III🕴'
             } else if (nivelAtual === 39) {
-                patt = 'God IV🕴'
+                patt = 'DEVIL IV🕴'
             } else if (nivelAtual === 40) {
-                patt = 'God V🕴'
+                patt = 'DEVIL V🕴'
             } else if (nivelAtual >= 41) {
-                patt = '🛐Big Satan~🛐'
+                patt = '🛐HAIL SATAN🛐'
             }
 
             //_TIPO DE USUÁRIO
             if (isOwner) {
-                var tuser = 'h0nda'
+                var tuser = 'El Italu🕴🏽'
             } else if (isPremium) {
-                var tuser = 'Premium'
+                var tuser = 'Premium😎'
             } else if (sender == isUser) {
-                var tuser = 'Registrado'
+                var tuser = 'Registrado 🥳'
             } else {
-                var tuser = 'Ghost'
+                var tuser = 'Membro comum🗿'
             }
 
             //_XP COM LEVELING ATIVO
@@ -616,18 +616,18 @@ h0nda-BOT`
                             const lvup = {
                                 text: `    ════❖LEVEL UP❖════
       ➣ Nome: @${namelv.split('@')[0]}
-  ╭╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼
+  ╭╼╾╼╾╼╾╼╾╼╾╼╾╼
   │➣ XP: ${getLevelingXp(sender)}
   │➣ Level: ${getLevel} -> ${getLevelingLevel(sender)}
   │➣ Patente: ${patt}
-  ╰╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼╾╼
+  ╰╼╾╼╾╼╾╼╾╼╾╼╾╼
   
-   ════LEVEL UP════`,
+   ════❖LEVEL UP❖════`,
                                 contextInfo: {
                                     mentionedJid: [namelv]
                                 }
                             }
-                            h0nda.sendMessage(from, lvup, text, {
+                            tiringa.sendMessage(from, lvup, text, {
                                 quoted: mek
                             })
                         }
@@ -653,21 +653,21 @@ h0nda-BOT`
        budy.match(new RegExp(/(www.\/\/)/)) ||
        budy.match(new RegExp(/(https:\/\/)/)) ||
        budy.match(new RegExp(/(.com\/\/)/))) { 
-        if (isUrl(budy) && budy.match('https://chat.whatsapp.com/GIf43PMBb2uCsu8S6K9Qpt')) return //reply('Link do grupo oficial do h0nda BOT✅')
+        if (isUrl(budy) && budy.match('https://chat.whatsapp.com/HwRvDjnMtyJL6uEhRLJ5yF')) return //reply('Link da 🌩️Família Tempest🌩️✅')
         if (isGroup && isUrl(budy) && budy.match('youtu')) return
         if (!isAntiLink) return
 		if (!isGroup) return
-		if (isGroupAdmins) return reply(`Você é admin, não vou te banir.`)
-		h0nda.updatePresence(from, Presence.composing)
+		if (isGroupAdmins) return reply(`Você é admin, não irei te banir.`)
+		tiringa.updatePresence(from, Presence.composing)
 		var Kick = `${sender.split("@")[0]}@s.whatsapp.net`
 		setTimeout( () => {
 		reply('tchau👋')
 		}, 1100)
 		setTimeout( () => {
-		h0nda.groupRemove(from, [Kick]).catch((e) => {reply(`ERRO: ${e}`)}) 
+		tiringa.groupRemove(from, [Kick]).catch((e) => {reply(`ERRO: ${e}`)}) 
 		}, 1000)
 		setTimeout( () => {
-		reply(`Detectei um link, você vai levar o famoso do ban!`)
+		reply(`Link detectado, você vai ser expulso...`)
 		}, 0)
 		}*/
 
@@ -680,16 +680,16 @@ h0nda-BOT`
             if(mek.key.fromMe){
             //if (isOwner) {
                 if (budo === `>public`) {
-                    if (public == `true`) return reply('Modo public já ativo')
+                    if (public == `true`) return reply('Modo público já ativo')
                     public = true
-                    h0nda.sendMessage(from, 'ALTERANDO PARA O MODO: PUBLIC', text, {
+                    tiringa.sendMessage(from, 'ALTERNANDO PARA O MODO: PÚBLICO', text, {
                         quoted: mek
                     })
                 }
                 if (budo === `>self`) {
-                    if (public == `false`) return reply('Modo private já ativo')
+                    if (public == `false`) return reply('Modo privado já ativo')
                     public = false
-                    h0nda.sendMessage(from, 'ALTERANDO PARA O MODO: PRIVATE', text, {
+                    tiringa.sendMessage(from, 'ALTERNANDO PARA O MODO: PRIVADO', text, {
                         quoted: mek
                     })
                 }
@@ -705,18 +705,18 @@ h0nda-BOT`
                 if (!mek.key.fromMe) {
                     if (!isGroup) return
                     if (!isBadWord) return
-                    if (isGroupAdmins) return reply(`Você é admin, não vou te banir.`)
-                    h0nda.updatePresence(from, Presence.composing)
+                    if (isGroupAdmins) return reply(`Você é admin, não irei te banir.`)
+                    tiringa.updatePresence(from, Presence.composing)
                     var kic = `${sender.split("@")[0]}@s.whatsapp.net`
-                    reply('Detectei uma palavra proibida!')
+                    reply('Palavra proibida detectada')
                     setTimeout(() => {
-                        h0nda.groupRemove(from, [kic]).catch((err) => {
+                        tiringa.groupRemove(from, [kic]).catch((err) => {
                             reply(`ERRO: ${e}`)
                         })
                     }, 1000)
                     setTimeout(() => {
-                        h0nda.updatePresence(from, Presence.composing)
-                        reply("byee👋")
+                        tiringa.updatePresence(from, Presence.composing)
+                        reply("tchau👋")
                     }, 0)
                 }
             }
@@ -773,10 +773,10 @@ h0nda-BOT`
                 os_version,
                 device_manufacturer,
                 device_model
-            } = h0nda.user.phone
+            } = tiringa.user.phone
 
             //_VISUALIZA AS MENSAGENS 
-            h0nda.chatRead(from)
+            tiringa.chatRead(from)
 
             //_CONTAGEM DE COMANDOS
             if (isCmd) cmdadd()
@@ -786,11 +786,11 @@ h0nda-BOT`
            
            expiredCheck(premium)
 
-            //ANTI-SPAM !
+            //ANTI-SPAM BY ITALU
      if (isCmd && isFiltered(from) && !isGroup) {
         console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
         const ff = {
-                  text:  `Não flooda @${sender.split('@')[0]}...\n\nAguarda 3 segundos antes de executar outro comando ❌`,
+                  text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
                     contextInfo: {
                         mentionedJid: [sender]
                     }
@@ -800,7 +800,7 @@ h0nda-BOT`
         if (isCmd && isFiltered(from) && isGroup) {
         console.log(color('SPAM', 'red'), color(moment.tz('America/Sao_Paulo').format('HH:mm:ss'), 'yellow'), color(`${command}`), 'DE:', color(pushname))
         const ff1 = {
-                  text:  `Não flooda @${sender.split('@')[0]}...\n\nAguarda 3 segundos antes de executar outro comando ❌`,
+                  text:  `Sem flood @${sender.split('@')[0]}...\n\nAguarde 3 segundos antes de usar outro comando✅`,
                     contextInfo: {
                         mentionedJid: [sender]
                     }
@@ -825,67 +825,55 @@ h0nda-BOT`
             if (!mek.key.fromMe) {
                 if (testat === 'bot') {
                     buf = fs.readFileSync(`./src/onichan.mp3`)
-                    h0nda.sendMessage(from, buf, audio, {
+                    tiringa.sendMessage(from, buf, audio, {
                         mimetype: 'audio/mp4',
                         quoted: mek,
                         ptt: true
                     })
                 }
           /*      if (testat === "fdp") {
-                    h0nda.updatePresence(from, Presence.composing)
-                    reply("meus ovos")
+                    tiringa.updatePresence(from, Presence.composing)
+                    reply("modere essa linguagem preto")
                 }
                 if (testat === "oi bot") {
-                    h0nda.updatePresence(from, Presence.composing)
-                    reply("Olá, pode usar *menu para ver os meus comandos !")
+                    tiringa.updatePresence(from, Presence.composing)
+                    reply("oi membro")
                 }
-              if (testat === "tmnc") {
-                    h0nda.updatePresence(from, Presence.composing)
-                    reply("Cala a boca seu preto")
+              if (testat === "vtmnc") {
+                    tiringa.updatePresence(from, Presence.composing)
+                    reply("gosta?")
                 }
-                if (testat === "vsf") {
-                    h0nda.updatePresence(from, Presence.composing)
-                    reply("Não chora vadia")
+                if (testat === "vsfd") {
+                    tiringa.updatePresence(from, Presence.composing)
+                    reply("Vtnc")
                 }
                 if (anun.match("sexo")) {
-                    h0nda.updatePresence(from, Presence.composing)
-                    reply(`AIIIN DELICINHA`)
+                    tiringa.updatePresence(from, Presence.composing)
+                    reply(`sexo nazal`)
                 }
-                if (testat === "caralho") {
-                    h0nda.updatePresence(from, Presence.composing)
-                    reply(`morra ${pushname}`)
-                }
-                if (testat === "cu") {
-                    h0nda.updatePresence(from, Presence.composing)
-                    reply(`vai me dar? ${pushname}`)
-                }
-                if (testat === "buceta") {
-                    h0nda.updatePresence(from, Presence.composing)
-                    reply(`Só gosto de rosinha's ${pushname}`)
-                }
-                if (testat === "caralho") {
-                    h0nda.updatePresence(from, Presence.composing)
+                if (testat === "pnc") {
+                    tiringa.updatePresence(from, Presence.composing)
                     reply(`morra ${pushname}`)
                 }
               if (testat.match('h0nda')) {
                         result = fs.readFileSync(`./src/mask.webp`)
-                        h0nda.sendMessage(from, result, sticker, {
+                        tiringa.sendMessage(from, result, sticker, {
                             quoted: mek
                         })
                     } */
-                if (budy.match(`@351927438657`)) {
+                if (budy.match(`@557499896089`)) {
                     result = fs.readFileSync(`./src/cofoi.webp`)
-                    h0nda.sendMessage(from, result, sticker, {
+                    tiringa.sendMessage(from, result, sticker, {
                         quoted: mek
                     })
                 }
 
-                  if (budy.match(`@351927438657`)) {
+                  if (budy.match(`@557499510904`)) {
                     sn = ["1", "2", "3"]
                     res = sn[Math.floor(Math.random() * sn.length)]
                /*     if (res == "1") {
                         result = fs.readFileSync(`./src/italu.mp3`)
-                        h0nda.sendMessage(from, result, audio, {
+                        tiringa.sendMessage(from, result, audio, {
                             mimetype: 'audio/mp4',
                             quoted: mek,
                             ptt: true
@@ -901,7 +889,7 @@ h0nda-BOT`
                             var red = "tzao"
                         }
                         result = fs.readFileSync(`./src/` + red + `.webp`)
-                        h0nda.sendMessage(from, result, sticker, {
+                        tiringa.sendMessage(from, result, sticker, {
                             quoted: mek
                         })
                     }
@@ -916,41 +904,82 @@ h0nda-BOT`
                 }*/
             }
             
-            if (isGroup && isPinkPussy) {
+            if (isGroup && isZ24) {
                 switch (testat) {
                     //_ COMANDOS Z24
-                    case 'luck':
-                        reply('rockstar bro')
+                    case 'fwfwefhw':
+                        reply('L-Lia-chan???😳👉👈')
                         break
-                    case 'rosinha':
-                        reply('kk queria ver uma né?')
+                    case 'dekdkdwkw':
+                        reply('Ala o maluco que gosta de poesia acústicaKKKKKKKKK')
                         break
-                    case 'peitos':
-                        reply('me bota pra mamar😋')
+                    case 'bwwkfwjjewtc':
+                        reply('Lek do rabão gostoso😋')
                         break
-                    case 'piroca':
-                        reply('A minha tem 45cm !')
+                    case 'wdjdqwtfgay':
+                        reply('Me obrigue a fazer figuras G-gilson-chan 😔👉👈')
                         break
-                    case 'carlos':
-                        reply('um filho da puta depressivo kkkkkkkkkkkkk')
+                    case 'seuxsackwo':
+                        reply('Oin dudu, poderia depositar R$3,000 na minha conta?🥺👉👈')
                         break
-                    case 'favelado':
-                        reply('odeio eles, pretos imundos')
+                    case 'dewdktyuo':
+                        reply('Ó o cp nisto mn!!! kkkkkkkk')
                         break
-                    case 'nazi':
-                        reply('SIEG HEIL!')
+                    case 'kdkaowtfdude':
+                        reply('Vamos fuck?💪😏')
                         break
-                    case 'hitler':
-                        reply('Mein FUHRER')
+                    case 'tadmasgh':
+                        reply('Tada não é ghost😙')
                         break
-                    case 'adm':
-                        reply('aquele que tem o pau de 45cm')
-                    case 'ovo':
+                    case 'gugdqjdqjdq':
+                        reply('O cara que é ignorado pra krl sem nenhummotivo🤧🤧\nMó gente boa🤙')
+                        break
+                    case 'lifnsnvnnr':
+                        reply('querem ver meus sapos?😍😍🤧💗💝😍💕😍💖💓🤧🤧💝😍💖🤧💖💞🤧💘💕😍💖')
+                        break
+                    case 'egvbcnuio':
+                        reply('Poesia acústica 3938933839373873 já lançou man?')
+                        break
+                    case 'assowqpzxzm':
+                        reply('a terra é um ovo')
+                        break
+                    case 'ofeamnajdawdq':
+                        reply('Quem gosta de trap não é gay, é apenas um hetero de bom gosto😔🤙')
+                        break
+                    case 'dakdwadqq':
+                        reply('vo chorakk😭😭')
+                        break
+                    case 'wdqjdjq':
+                        reply('melhor adm🙄🤙')
+                        break
+                    case 'viruyuwwfuni':
+                        reply('kdqdkqdk3q')
+                        break
+                    case 'patorttttttlino':
+                        reply('Famoso pica de bambuKSKSKSKSKSKSKSS')
+                        break
+                    case 'keyhhht':
+                        reply('jaré do krai🐊')
+                        break
+                    case 'jeooojdjqjdjqdlado':
+                        reply('fica frio aíkkkkkkkkk🥶🥶🥶')
+                        break
+                    case 'braddwdwiasp':
+                        reply('queria estar assim:\n☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️🌂☂️')
+                        break
+                    case 'thaitrygaswii':
+                    case 'thcfnsjaii':
+                        reply('Linda, fofa, perfeita😍💗💝😍💗💓💞💝💘💖💗💞😍💝💘💗💗🤧💝💖😭💘💓💖😭💞💗💘')
+                        break
+                    case 'bxdslaliel':
+                        reply('Cara de pastel')
+                        break
+                    case 'dg':
                         result = fs.readFileSync(`./src/emoji1.webp`)
-                        h0nda.sendMessage(from, result, sticker, {
+                        tiringa.sendMessage(from, result, sticker, {
                             quoted: mek
                         })
-                        reply('🤨')
+                        reply('Mlk chato🤨')
                         break
                     case 'turgo':
                     case 'tugo':
@@ -958,7 +987,7 @@ h0nda-BOT`
                         res = mett[Math.floor(Math.random() * mett.length)]
                         if (res == "1") {
                             result = fs.readFileSync(`./src/tugo.webp`)
-                            h0nda.sendMessage(from, result, sticker, {
+                            tiringa.sendMessage(from, result, sticker, {
                                 quoted: mek
                             })
                             reply('Chassi de griloKKKKKKKKKKKKKKKKKKKKKKKK')
@@ -966,7 +995,7 @@ h0nda-BOT`
                             mett = ["1", "2"]
                             res = mett[Math.floor(Math.random() * mett.length)]
                             result = fs.readFileSync(`./src/tuc` + res + `.webp`)
-                            h0nda.sendMessage(from, result, sticker, {
+                            tiringa.sendMessage(from, result, sticker, {
                                 quoted: mek
                             })
                             reply('"A solidão é minha única amiga"\n☠💀☠💀☠💀☠💀☠💀☠💀☠💀☠💀☠💀☠💀☠💀☠💀\n\nTurgo - 2021')
@@ -977,7 +1006,7 @@ h0nda-BOT`
                         res = mett[Math.floor(Math.random() * mett.length)]
                         result = fs.readFileSync(`./src/` + res + `.webp`)
                         setTimeout(() => {
-                            h0nda.sendMessage(from, result, sticker, {
+                            tiringa.sendMessage(from, result, sticker, {
                                 quoted: mek
                             })
                         }, 0)
@@ -997,10 +1026,10 @@ h0nda-BOT`
                 //_MENU
                 case 'help':
                 case 'menu':
-                case 'h0nda':
+                case 'help':
                 case 'menu':
                 case '?':
-                case 'ajuda':
+                case 'h0ndamenu':
                 case 'comandos':
                     const useLevel = getLevelingLevel(sender)
                     const useXp = getLevelingXp(sender)
@@ -1034,20 +1063,20 @@ h0nda-BOT`
                     }
                     costum(help(pushname, prefix, wa_version, BT, temporizador, uptime, hr, tanggal, groupName, users, chatss, tuser, checATM, useLevel, useXp, requireXp, patt, comandost), text, tescuk, cr)
                         /*if (useLevel == undefined && useXp == undefined) {
-                        	reply('O "undefined" indica que ainda não se registrou \nUse o comando =registrar')
+                        	reply('Informações com "undefined" indicam que você ainda não se registrou \nUse o comando =registrar')
                         }*/
                        addFilter(from)
                     break
 
                      //_TESTES
-                      case 'tilapiagolar': case 'sexonazaltropical':
+                      case 'donate': case 'doar':
                     donate = `Incentive meu criador fazendo uma doação via pix:\n`
                     donate2 = `b3884fdd-bd76-4fe0-8745-92aad4d2a7f3`
-                h0nda.sendMessage(from, donate, text, {quoted: mek})
-                h0nda.sendMessage(from, donate2, text)
+                tiringa.sendMessage(from, donate, text, {quoted: mek})
+                tiringa.sendMessage(from, donate2, text)
                 break
                      
-                     case 'xdqjrttyu':
+                     case 'textpro':
         addFilter(sender)
                try {
         data = await textpro(args.join(' ').split('|')[0], args.join(' ').split('|')[1])
@@ -1055,7 +1084,7 @@ h0nda-BOT`
         exec(`wget ${data} -O ${ranp}`, (err) => {
 						//if (err) return reply(mess.error.stick)
 						buffer = fs.readFileSync(ranp)
-						h0nda.sendMessage(from, buffer, image, { quoted: mek })
+						tiringa.sendMessage(from, buffer, image, { quoted: mek })
 						fs.unlinkSync(ranp)
 					})
 					} catch (err) {
@@ -1069,11 +1098,11 @@ h0nda-BOT`
                     pm2 = `pm2 kill`
                     reply('A mimir...')
                     exec(pm2, (err, stdout) => {
-                        if (err) return h0nda.sendMessage(from, "Erro", text, {
+                        if (err) return tiringa.sendMessage(from, "Erro", text, {
                             quoted: mek
                         })
                         if (stdout) {
-                            h0nda.sendMessage(from, stdout, text, {
+                            tiringa.sendMessage(from, stdout, text, {
                                 quoted: mek
                             })
                         }
@@ -1084,12 +1113,12 @@ h0nda-BOT`
                     exec(`magick './src/wel.jpg' -gravity west -fill '#ff2fa2' -font './src/font-gue.ttf' -size 1280x710 -pointsize 75 -interline-spacing 7.5 -annotate +460-45 'teste' -pointsize 35 -annotate +460+83 'a' -pointsize 50 -annotate +460+200 'Welcome To ${groupName}' 'https://static.vivaolinux.com.br/imagens/fotos/desconhecido.png' -resize %[fx:t?u.w*0.2:u.w]x%[fx:?u.h*0.2:u.h] -gravity center -geometry -430+70 -composite 'hasil.jpg'`)
                         .on('error', () => reply('error'))
                         .on('exit', () => {
-                            h0nda.sendMessage(from, fs.readFileSync('hasil.jpg'), MessageType.image)
+                            tiringa.sendMessage(from, fs.readFileSync('hasil.jpg'), MessageType.image)
                         })
                     break
 
                   //leveling
-                    //  case 'minerarxp': 
+                    //  case 'mining': 
                     if (!isGroup) return reply(ptbr.group())
                     if (isOwner) {
                         const one = Math.ceil(Math.random() * 10000)
@@ -1116,7 +1145,7 @@ h0nda-BOT`
                     }
                     break
 
-                case 'tapinha':
+                case 'tapa':
                     if (!isGroup) return reply(ptbr.group())
                     if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('A marca-alvo que você quer chutar!')
                     mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
@@ -1124,7 +1153,7 @@ h0nda-BOT`
                     for (let _ of mentioned) {
                         pru += `@${_.split('@')[0]}\n`
                     }
-                    susp = `Acabou de dar um tapa na raba do(a) gostoso(a)😏 @${mentioned[0].split('@')[0]}`
+                    susp = `Você acabou de dar um tapa na raba da😏 @${mentioned[0].split('@')[0]}`
                     var suspp = {
                         text: susp,
                         contextInfo: {
@@ -1132,7 +1161,7 @@ h0nda-BOT`
                         },
                     }
                     const kratos = fs.readFileSync('./src/tapa.mp4')
-                    h0nda.sendMessage(from, kratos, MessageType.video, {
+                    tiringa.sendMessage(from, kratos, MessageType.video, {
                         mimetype: 'video/gif',
                         quoted: mek,
                         caption: suspp
@@ -1141,12 +1170,12 @@ h0nda-BOT`
 
                 case 'gc':
                     if (body.endsWith('Tutup')) {
-                        h0nda.groupSettingChange(from, GroupSettingChange.messageSend, true)
+                        tiringa.groupSettingChange(from, GroupSettingChange.messageSend, true)
                     }
                     break
 
                 case 'ts':
-                    h0nda.sendMessage(from, bahasa(prefix, sender), text, {
+                    tiringa.sendMessage(from, bahasa(prefix, sender), text, {
                         quoted: mek
                     })
                     break
@@ -1155,14 +1184,14 @@ h0nda-BOT`
                case 'antifake':
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
-                    if (args.length < 1) return reply(`Digite o comando corretamente:\nComando: ${prefix}antifake 1 para ativar `)
+                    if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}antifake 1 para ativar `)
                     if (Number(args[0]) === 1) {
                         if (isAntiFa) return reply('❎O recurso ANTIFAKE já está ativado no grupo❎')
                         antifake.push(from)
                         fs.writeFileSync('./database/data/antifake.json', JSON.stringify(antifake))
-                        reply('✅O recurso AntiFakes foi ativado✅')
+                        reply('✅O recurso ANTIFAKE foi ativado✅')
                     } else if (Number(args[0]) === 0) {
-                        if (!isAntiFa) return reply('❎O recurso AntiFakes não está ativado no grupo❎')
+                        if (!isAntiFa) return reply('❎O recurso ANTIFAKE não está ativado no grupo❎')
                         let position = false
                         Object.keys(antifake).forEach((i) => {
                             if (antifake[i] === from) {
@@ -1173,9 +1202,9 @@ h0nda-BOT`
                             antifake.splice(position, 1)
                             fs.writeFileSync('./database/data/antifake.json', JSON.stringify(antifake))
                         }
-                        reply('❌O recurso AntiFakes foi desativado❌')
+                        reply('❌O recurso ANTIFAKE foi desativado❌')
                     } else {
-                        reply(`Digite o comando corretamente :\nComando: ${prefix}antifake 1, para ativar e 0 para desativar`)
+                        reply(`Digite da forma correta:\nComando: ${prefix}antifake 1, para ativar e 0 para desativar`)
                     }
                     break
                     
@@ -1213,14 +1242,14 @@ h0nda-BOT`
                     for (let i = 0; i < mentioned.length; i++){
                         addBanned(mentioned[0], args[1], ban)
                     }
-                    mentions(`🚫@${mentioned[0].split('@')[0]} foi banido e já não conseguirá acessar os comandos do h0nda 🚫`, mentioned, true)
+                    mentions(`🚫@${mentioned[0].split('@')[0]} foi banido e não poderá mais usar os comandos do bot🚫`, mentioned, true)
                 } else if (isQuotedMsg) {
                     if (quotedMsg.sender.match('557499510904')) return reply(`🤨`)
                     addBanned(quotedMsg.sender, args[1], ban)
-                    mentions(`🚫@${mentioned[0].split('@')[0]} foi banido e já não conseguirá acessar os comandos do h0nda 🚫`, mentioned, true)
+                    mentions(`🚫@${mentioned[0].split('@')[0]} foi banido e não poderá mais usar os comandos do bot🚫`, mentioned, true)
                 } else if (!isNaN(args[1])) {
                     addBanned(args[1] + '@s.whatsapp.net', args[2], ban)
-                    mentions(`🚫@${mentioned[0].split('@')[0]} foi banido e já não conseguirá acessar os comandos do h0nda 🚫`, mentioned, true)
+                    mentions(`🚫@${mentioned[0].split('@')[0]} foi banido e não poderá mais usar os comandos do bot🚫`, mentioned, true)
                 } else {
                     reply(`Use ${prefix}ban @menção para banir um usuário`)
                 }
@@ -1233,13 +1262,13 @@ h0nda-BOT`
                     for (let i = 0; i < mentioned.length; i++){
                         unBanned(mentioned[i], ban)
                     }
-                    mentions(`❎@${mentioned[0].split('@')[0]} foi desbanido e poderá novamente acessar os comandos do bot ❎`, mentioned, true)
+                    mentions(`❎@${mentioned[0].split('@')[0]} foi desbanido e poderá novamente usar os comandos do bot❎`, mentioned, true)
                 }if (isQuotedMsg) {
                     unBanned(quotedMsg.sender, ban)
-                    mentions(`❎@${mentioned[0].split('@')[0]} foi desbanido e poderá novamente acessar os comandos do bot ❎`, mentioned, true)
+                    mentions(`❎@${mentioned[0].split('@')[0]} foi desbanido e poderá novamente usar os comandos do bot❎`, mentioned, true)
                 } else if (!isNaN(args[0])) {
                     unBanned(args[0] + '@s.whatsapp.net', ban)
-                    mentions(`❎@${mentioned[0].split('@')[0]} foi desbanido e poderá novamente acessar os comandos do bot ❎`, mentioned, true)
+                    mentions(`❎@${mentioned[0].split('@')[0]} foi desbanido e poderá novamente usar os comandos do bot❎`, mentioned, true)
                 } else {
                     reply(`Use ${prefix}unban @menção para desbanir um usuário`)
                 }
@@ -1252,13 +1281,13 @@ h0nda-BOT`
                     for (let i = 0; i < mentioned.length; i++){
                         addPremiumUser(mentioned[0], args[1], premium)
                     }
-                    mentions(`👑@${mentioned[0].split('@')[0]} foi adicionado à lista de usuários premium !`, mentioned, true)
+                    mentions(`👑@${mentioned[0].split('@')[0]} foi adicionado à lista de usuários premium com sucesso👑`, mentioned, true)
                 } else if (isQuotedMsg) {
                     addPremiumUser(quotedMsg.sender, ban)
-                    mentions(`👑@${mentioned[0].split('@')[0]} foi adicionado à lista de usuários premium !`, mentioned, true)
+                    mentions(`👑@${mentioned[0].split('@')[0]} foi adicionado à lista de usuários premium com sucesso👑`, mentioned, true)
                 } else if (!isNaN(args[0])) {
                     addPremiumUser(args[0] + '@s.whatsapp.net', args[1], premium)
-                    mentions(`👑@${mentioned[0].split('@')[0]} foi adicionado à lista de usuários premium !`, mentioned, true)
+                    mentions(`👑@${mentioned[0].split('@')[0]} foi adicionado à lista de usuários premium com sucesso👑`, mentioned, true)
                 } else {
                     reply(`Use ${prefix}addprem @menção para adicionar à lista de usuários premium`)
                 } 
@@ -1271,13 +1300,13 @@ h0nda-BOT`
                     for (let i = 0; i < mentioned.length; i++){
                         dellprem(mentioned[0], args[1], premium)
                     }
-                    mentions(`❎@${mentioned[0].split('@')[0]} foi removido da lista de usuários premium !`, mentioned, true)
+                    mentions(`❎@${mentioned[0].split('@')[0]} foi removido da lista de usuários premium com sucesso❎`, mentioned, true)
                 } else if (isQuotedMsg) {
                     dellprem(quotedMsg.sender, premium)
-                    mentions(`❎@${mentioned[0].split('@')[0]} foi removido da lista de usuários premium !`, mentioned, true)
+                    mentions(`❎@${mentioned[0].split('@')[0]} foi removido da lista de usuários premium com sucesso❎`, mentioned, true)
                 } else if (!isNaN(args[0])) {
                     dellprem(args[0] + '@s.whatsapp.net', args[1], premium)
-                    mentions(`❎@${mentioned[0].split('@')[0]} foi removido da lista de usuários premium !`, mentioned, true)
+                    mentions(`❎@${mentioned[0].split('@')[0]} foi removido da lista de usuários premium com sucesso❎`, mentioned, true)
                 } else {
                     reply(`Use ${prefix}dellprem @menção para remover um usuário da lista de usuários premium`)
                 } 
@@ -1302,7 +1331,7 @@ h0nda-BOT`
                 break
                 
             case 'listban':
-                let txtx = `Usuários banidos\nTotal: ${ban.length}\n\n`
+                let txtx = `Lista de usuários banidos\nTotal: ${ban.length}\n\n`
                 let menx = [];
                 for (let i of ban){
                     menx.push(i.id)
@@ -1338,20 +1367,20 @@ h0nda-BOT`
                 if (!isBotGroupAdmins) return reply(ptbr.Badmin())
                 mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
                 if (mentioned.length !== 0){
-                    h0nda.groupDemoteAdmin(from, mentioned)
+                    tiringa.groupDemoteAdmin(from, mentioned)
                    // .then((res) => reply(jsonformat(res)))
                  //   .catch((err) => reply(jsonformat(err)))
                 } else if (isQuotedMsg) {
                     if (quotedMsg.sender === ownerNumber) return reply(`Tidak bisa kick Owner`)
-                    h0nda.groupDemoteAdmin(from, [quotedMsg.sender])
+                    tiringa.groupDemoteAdmin(from, [quotedMsg.sender])
                    // .then((res) => reply(jsonformat(res)))
                  //   .catch((err) => reply(jsonformat(err)))
                 } else if (!isNaN(args[1])) {
-                    h0nda.groupDemoteAdmin(from, [args[1] + '@s.whatsapp.net'])
+                    tiringa.groupDemoteAdmin(from, [args[1] + '@s.whatsapp.net'])
                     //.then((res) => reply(jsonformat(res)))
                   //  .catch((err) => reply(jsonformat(err)))
                 } else {
-                    reply(`Utilize o comando corretamente, ${prefix}rebaixar @menção para rebaixar um integrante do grupo`)
+                    reply(`Use dessa forma: ${prefix}rebaixar @menção para rebaixar um integrante do grupo`)
                 }
                 break
                 
@@ -1361,24 +1390,24 @@ h0nda-BOT`
                 if (!isBotGroupAdmins) return reply(ptbr.Badmin())
                 mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
                 if (mentioned.length !== 0){
-                    h0nda.groupMakeAdmin(from, mentioned)
+                    tiringa.groupMakeAdmin(from, mentioned)
                    // .then((res) => reply(jsonformat(res)))
                  //   .catch((err) => reply(jsonformat(err)))
                 } else if (isQuotedMsg) {
-                    h0nda.groupMakeAdmin(from, [quotedMsg.sender])
+                    tiringa.groupMakeAdmin(from, [quotedMsg.sender])
                     //.then((res) => reply(jsonformat(res)))
                   //  .catch((err) => reply(jsonformat(err)))
                 } else if (!isNaN(args[1])) {
-                    h0nda.groupMakeAdmin(from, [args[1] + '@s.whatsapp.net'])
+                    tiringa.groupMakeAdmin(from, [args[1] + '@s.whatsapp.net'])
                    // .then((res) => reply(jsonformat(res)))
                 //    .catch((err) => reply(jsonformat(err)))
                 } else {
-                    reply(`Utilize o comando corretamente, ${prefix}promover @menção para promover um membro do grupo`)
+                    reply(`Use dessa forma: ${prefix}promover @menção para promover um integrante do grupo`)
                 }
                 break
                  
                  case 'igsearch':
-                if (args.length < 1) return reply('Digite o nome do usuario que deseja stalkear')
+                if (args.length < 1) return reply('Digite o nome do usuario que deseja buscar')
                     reply(ptbr.wait())
                     anu = await fetchJson(`https://api.zeks.xyz/api/iguser?apikey=${ZeksKey}&q=${body.slice(8)}`, {
                         method: 'get'
@@ -1389,13 +1418,47 @@ h0nda-BOT`
 Privado: ${i.private_user}
 Verificado: ${i.verified_user}
 Link: https://www.instagram.com/${i.username}\n\n𝗜𝗻𝘀𝘁a𝗴𝗿𝗮𝗺 𝗦𝗲𝗮𝗿𝗰𝗵
-
+`
                     }
                     reply(teks.trim())
                     addFilter(from)
                     break
                  
-                 case 'ytsdhjdashdha':
+                 case 'happymod':
+                if (args.length < 1) return reply('Digite o nome do apk que deseja buscar')
+                    reply(ptbr.wait())
+                    anu = await fetchJson(`https://api.zeks.xyz/api/happymod?apikey=${ZeksKey}&q=${body.slice(10)}`, {
+                        method: 'get'
+                    })
+                    teks = '𝗛𝗮𝗽𝗽𝘆 𝗺𝗼𝗱 𝗦𝗲𝗮𝗿𝗰𝗵\n'
+                    for (let i of anu.result) {
+                        teks += `Nome do apk: ${i.title}
+Avaliação: ${i.rating}
+Url: ${i.url}\n\n
+`
+                    }
+                    reply(teks.trim())
+                    addFilter(from)
+                    break
+                 
+                 case 'apkpure':
+                if (args.length < 1) return reply('Digite o nome do app que deseja buscar')
+                    reply(ptbr.wait())
+                    anu = await fetchJson(`https://api.zeks.xyz/api/apkpure?q=${body.slice(9)}&apikey=${ZeksKey}`, {
+                        method: 'get'
+                    })
+                    teks = '𝗔𝗽𝗸 𝗣𝘂𝗿𝗲 𝗦𝗲𝗮𝗿𝗰𝗵\n'
+                    for (let i of anu.result) {
+                        teks += `Nome do apk: ${i.title}
+Url: ${i.url}
+Avaliação: ${i.rating}\n\n
+`
+                    }
+                    reply(teks.trim())
+                    addFilter(from)
+                    break
+                 
+                 case 'ytsearch':
                  if (args.length < 1) return reply('Digite o nome do vídeo que deseja buscar')
                     anu = await fetchJson(`https://api.zeks.xyz/api/yts?q=${body.slice(10)}&apikey=${ZeksKey}`, {
                         method: 'get'
@@ -1414,9 +1477,31 @@ Data do upload : ${i.video.upload_date}
 Visualizações: ${i.video.views}\n\n
 `
                     }
-                    h0nda.sendMessage(from, buffer, image, {
+                    tiringa.sendMessage(from, buffer, image, {
                         quoted: mek,
                         caption: teks.trim()
+                    })
+                    addFilter(from)
+                    break
+
+                 case 'igstalk':
+                 if (args.length < 1) return reply('Digite o nome do usuario que deseja stalkear')
+                    anu = await fetchJson(`https://api.zeks.xyz/api/igstalk?apikey=${ZeksKey}&username=${body.slice(9)}`, {
+                        method: 'get'
+                    })
+                    buffer = await getBuffer(anu.profile_pic)
+                    teks = `Nome de usuário: ${anu.username}
+Nome completo: ${anu.fullname}
+Seguidores: ${anu.follower}
+Seguindo: ${anu.following}
+Verificado: ${anu.is_verified}
+Trabalho: ${anu.is_bussiness}
+Privado: ${anu.is_private}
+Link : https://www.instagram.com/${anu.username}
+Bio : ${anu.bio}`
+                    tiringa.sendMessage(from, buffer, image, {
+                        quoted: mek,
+                        caption: teks
                     })
                     addFilter(from)
                     break
@@ -1427,7 +1512,7 @@ Visualizações: ${i.video.views}\n\n
                         method: 'get'
                     })
                     buffer = await getBuffer(`https://i.ibb.co/znvZ20B/9b667c9d4b1b.jpg`)
-                    h0nda.sendMessage(from, buffer, image, {
+                    tiringa.sendMessage(from, buffer, image, {
                         quoted: mek
                     })
                     teks = '𝗣𝗹𝗮𝘆 𝘀𝘁𝗼𝗿𝗲\n'
@@ -1444,7 +1529,7 @@ Link: ${i.url}
                     addFilter(from)
                     break
                  
-                 case 'med1iafirokkkke':
+                 case 'mediafire':
                 if (args.length < 1) return reply('Digite o link do arquivo que deseja buscar no Mediafire')
                     anu = await fetchJson(`https://api.zeks.xyz/api/mediafire?apikey=${ZeksKey}&url=${args[0]}`, {
                         method: 'get'
@@ -1456,7 +1541,7 @@ Data do upload: ${anu.upload_date}
 Tipo de arquivo: ${anu.file_type}
 Link pra download: ${anu.download}
 Descrição: ${anu.description}`
-                    h0nda.sendMessage(from, teks, text, {
+                    tiringa.sendMessage(from, teks, text, {
                         quoted: mek
                     })
                     costum(buffer, MessageType.document)
@@ -1480,15 +1565,15 @@ Link: ${i.swipeUpLink}\n\n𝗜𝗚 𝗦𝗧𝗢𝗥𝗬\n`
                     addFilter(from)
                     break
                  
-                 case 'lindo':
-             const lindo = `351927438657@s.whatsapp.net`
+                 case 'baiano':
+             const baiano = `351927438657@s.whatsapp.net`
                     const tame = {
                         text: `@${baiano.split("@")[0]} `,
                         contextInfo: {
-                            mentionedJid: [lindo]
+                            mentionedJid: [baiano]
                         }
                     }
-                    h0nda.sendMessage(from, tame, text)
+                    tiringa.sendMessage(from, tame, text)
                     addFilter(from)
                     break
                  
@@ -1500,7 +1585,7 @@ reply(teks)
                  
                  case 'getbio':
                 var yy = mek.message.extendedTextMessage.contextInfo.mentionedJid[0]
-                var p = await h0nda.getStatus(`${yy}`, MessageType.text)
+                var p = await tiringa.getStatus(`${yy}`, MessageType.text)
                 reply(p.status)
                 if (p.status == 401) {
                 reply("indisponível")
@@ -1521,12 +1606,12 @@ reply(teks)
                 case 'bc':
                  if (!isOwner) return reply(ownerB(ownerName))
                     if (args.length < 1) return reply('Digite algo juntamente ao comando')
-                    anu = await h0nda.chats.all()
+                    anu = await tiringa.chats.all()
                     if (isMedia && !mek.message.videoMessage || isQuotedImage) {
                         const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        buff = await h0nda.downloadMediaMessage(encmedia)
+                        buff = await tiringa.downloadMediaMessage(encmedia)
                         for (let _ of anu) {
-                            h0nda.sendMessage(_.jid, buff, image, {
+                            tiringa.sendMessage(_.jid, buff, image, {
                                 caption: `⌜   ᴛʀᴀɴsᴍɪssᴀ̃ᴏ   ⌟\n\n${body.slice(3)}`
                             })
                         }
@@ -1541,10 +1626,10 @@ reply(teks)
 
                 case 'clearchat':
                     if (!isOwner) return reply(ownerB(ownerName))
-                    anu = await h0nda.chats.all()
-                    list_chat = await h0nda.chats.all()
+                    anu = await tiringa.chats.all()
+                    list_chat = await tiringa.chats.all()
                     for (let chat of list_chat) {
-                        h0nda.modifyChat(chat.jid, "delete", {includeStarred: false})
+                        tiringa.modifyChat(chat.jid, "delete", {includeStarred: false})
                     }
                     reply("Chat limpo")
                     break
@@ -1556,13 +1641,13 @@ reply(teks)
                         ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.waitimg())
                     addFilter(from)
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ger)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ger)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         imgtrg = `${anu.display_url}`
                         anu1 = await fetchJson(`https://jonaz-api-v2.herokuapp.com/zombie?url=${imgtrg}`)
-                        if (anu1.error) return reply("Não detectei nenhum rosto, tente novamente ou selecione outra imagem!")
+                        if (anu1.error) return reply("Não consegui detectar nenhum rosto")
                         nobg = await getBuffer(anu1.resultado)
-                        h0nda.sendMessage(from, nobg, image, {
+                        tiringa.sendMessage(from, nobg, image, {
                             quoted: mek
                         })
                     } else {
@@ -1570,15 +1655,32 @@ reply(teks)
                     }
                     break
 
-                case 'gerarnick': //BY h0nda
+                case 'gerarncick': //BY KRATO OF KIBES
                     teksl = body.slice(10)
                     send = await fetchJson(`http://brizas-api.herokuapp.com/gerador/fancytext?apikey=brizaloka&text=${teksl}`)
                     teks = `✅ NICKS PERSONALIZADOS ✅
 
 LISTA RANDOM:
-- Não dísponivel de momento...
-
-                    h0nda.sendMessage(from, teks, text, {
+🔰 ${send.random_1} 
+🔰 ${send.random_2} 
+🔰 ${send.random_3} 
+🔰 ${send.random_4} 
+🔰 ${send.random_5}
+ 
+ FONTES PRÉ-DEFINIDAS:
+🔰 ${send.squares}
+🔰 ${send.inverted_squares}
+🔰 ${send.italic}
+🔰 ${send.bold}
+🔰 ${send.future_alien}
+🔰 ${send.asian_1}
+🔰 ${send.asian_2}
+🔰 ${send.squiggle}
+🔰 ${send.squiggle_2}
+🔰 ${send.squiggle_3}
+🔰 ${send.squiggle_4}
+🔰 ${send.neon}`
+                    tiringa.sendMessage(from, teks, text, {
                         quoted: mek
                     })
                     addFilter(from)
@@ -1596,13 +1698,13 @@ LISTA RANDOM:
 
                 case 'trigger':
                     encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                    media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${media} -filter_complex "acrusher=level_in=8:level_out=18:bits=8:mode=log:aa=1" ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(media)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -1612,11 +1714,11 @@ LISTA RANDOM:
                     addFilter(from)
                     break
 
-                case 'take':
+                case 'roubarksi':
                     var namaPackss = q.substring(0, q.indexOf('|') - 0)
                     var authorPackss = q.substring(q.lastIndexOf('|') + 1)
                     stiker_wm = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    dlstiker_wm = await h0nda.downloadAndSaveMediaMessage(stiker_wm)
+                    dlstiker_wm = await tiringa.downloadAndSaveMediaMessage(stiker_wm)
                     stickerpackid = "com.snowcorp.stickerly.android.stickercontentprovider b5e7275f-f1de-4137-961f-57becfad34f2"
                     packname = namaPackss;
                     author = authorPackss;
@@ -1657,7 +1759,7 @@ LISTA RANDOM:
                         if (err) return console.log(err);
                         exec(`webpmux -set exif ${exif321} undefined.webp -o ${exifst}`, (err) => {
                             if (err) return console.log(err);
-                            h0nda.sendMessage(from, fs.readFileSync(exifst), sticker, {
+                            tiringa.sendMessage(from, fs.readFileSync(exifst), sticker, {
                                 quoted: mek
                             })
                             fs.unlinkSync(exifst)
@@ -1677,11 +1779,11 @@ LISTA RANDOM:
                         reply(ptbr.erro())
                     })
                     lagunye = await getBuffer(anu[0].link)
-                    h0nda.sendMessage(from, lagunye, audio, {
+                    tiringa.sendMessage(from, lagunye, audio, {
                         quoted: {
                             key: {
                                 fromMe: false,
-                                participant: `351927438657@s.whatsapp.net`,
+                                participant: `556296638900@s.whatsapp.net`,
                                 ...(from ? {
                                     remoteJid: "status@broadcast"
                                 } : {})
@@ -1716,7 +1818,7 @@ LISTA RANDOM:
                         reply(ptbr.erro())
                     })
                     vidionye = await getBuffer(anu[0].link)
-                    h0nda.sendMessage(from, vidionye, video, {
+                    tiringa.sendMessage(from, vidionye, video, {
                         mimetype: 'video/mp4',
                         filename: `${anu[0].output}`,
                         quoted: mek
@@ -1736,11 +1838,11 @@ LISTA RANDOM:
                     inf7 = await getBuffer(annu[0].thumb)
                     lagu = await getBuffer(annu[0].link)
                     reply('Baixando e enviando sua música...')
-                    h0nda.sendMessage(from, lagu, audio, {
+                    tiringa.sendMessage(from, lagu, audio, {
                             quoted: {
                                 key: {
                                     fromMe: false,
-                                    participant: `351927438657@s.whatsapp.net`,
+                                    participant: `0@s.whatsapp.net`,
                                     ...(from ? {
                                         remoteJid: "status@broadcast"
                                     } : {})
@@ -1781,14 +1883,14 @@ LISTA RANDOM:
                             // if (res.status === 'error') return reply(`${res.title}\n\nError silahkan klik link dibawah ini\n${res.link}`)
                             if (res.status === 'sukses') {
                                 thumb = await getBuffer(res.thumbnail)
-                                    // h0nda.sendMessage(from, res.thumbnail, image, {quoted: mek, caption: `❏ *Judul* : ${res.title}\n\nBentar kak Audionya lagi dikirim`})
+                                    // tiringa.sendMessage(from, res.thumbnail, image, {quoted: mek, caption: `❏ *Judul* : ${res.title}\n\nBentar kak Audionya lagi dikirim`})
                                 vid = await getBuffer(res.link)
-                                    // h0nda.sendMessage(from, vid, audio, {mimetype: 'audio/mp4',  filename: `${res.title}.mp3`, quoted: mek})
-                                h0nda.sendMessage(from, vid, audio, {
+                                    // tiringa.sendMessage(from, vid, audio, {mimetype: 'audio/mp4',  filename: `${res.title}.mp3`, quoted: mek})
+                                tiringa.sendMessage(from, vid, audio, {
                                         quoted: {
                                             key: {
                                                 fromMe: false,
-                                                participant: `351927438657@s.whatsapp.net`,
+                                                participant: `0@s.whatsapp.net`,
                                                 ...(from ? {
                                                     remoteJid: "status@broadcast"
                                                 } : {})
@@ -1827,9 +1929,9 @@ LISTA RANDOM:
                     var descnye = args[2];
                     run = getRandom('.jpeg')
                     var media1 = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                    var media2 = await h0nda.downloadAndSaveMediaMessage(media1)
+                    var media2 = await tiringa.downloadAndSaveMediaMessage(media1)
                     var ddatae = await imageToBase64(JSON.stringify(media2).replace(/\"/gi, ''))
-                    h0nda.sendMessage(from, {
+                    tiringa.sendMessage(from, {
                         text: `${urlnye}`,
                         matchedText: `${urlnye}`,
                         canonicalUrl: `${urlnye}`,
@@ -1847,13 +1949,13 @@ LISTA RANDOM:
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ger)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ger)
                         upload = await uploadimg(owgi, Date.now() + '.jpg')
                         //anu = await imgbb("3b8594f4cb11895f4084291bc655e510", owgi)
                         teeks = `${upload.result.image}`
                         anu3 = (`https://some-random-api.ml/canvas/gay?avatar=${teeks}`)
                         abc = await getBuffer(anu3)
-                        h0nda.sendMessage(from, abc, image, {
+                        tiringa.sendMessage(from, abc, image, {
                             quoted: mek
                         })
                     } else {
@@ -1868,14 +1970,14 @@ LISTA RANDOM:
                         ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
                         addFilter(from)
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ger)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ger)
                         anu = await imgbb("3b8594f4cb11895f4084291bc655e510", owgi)
                         teks = `${anu.display_url}`
                         ranp = getRandom('.gif')
                         rano = getRandom('.webp')
                         anu4 = (`https://some-random-api.ml/canvas/sepia?avatar=${teks}`)
                         abc = await getBuffer(anu4)
-                        h0nda.sendMessage(from, abc, image, {
+                        tiringa.sendMessage(from, abc, image, {
                             quoted: mek
                         })
                     } else {
@@ -1889,14 +1991,14 @@ LISTA RANDOM:
                         ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
                         addFilter(from)
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ger)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ger)
                         anu = await imgbb("3b8594f4cb11895f4084291bc655e510", owgi)
                         teks = `${anu.display_url}`
                         ranp = getRandom('.gif')
                         rano = getRandom('.webp')
                         anu8 = (`https://some-random-api.ml/canvas/glass?avatar=${teks}`)
                         abc = await getBuffer(anu8)
-                        h0nda.sendMessage(from, abc, image, {
+                        tiringa.sendMessage(from, abc, image, {
                             quoted: mek
                         })
                     } else {
@@ -1913,7 +2015,7 @@ LISTA RANDOM:
                     tx1 = pc.split("|")[0];
                     tx2 = pc.split("|")[1];
                     hehe = await getBuffer(`https://videfikri.com/api/textmaker/8bit/?text1=${tx1}&text2=${tx2}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -1921,14 +2023,14 @@ LISTA RANDOM:
                 case 'badword':
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
-                    if (args.length < 1) return reply(`Utilize o comando corretamente:\nComando: ${prefix}leveis 1 para ativar `)
+                    if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}leveis 1 para ativar `)
                     if (Number(args[0]) === 1) {
                         if (isBadWord) return reply('❎O recurso BADWORD já está ativado no grupo❎')
                         _badword.push(from)
                         fs.writeFileSync('./database/data/badword.json', JSON.stringify(_badword))
-                        reply('✅O recurso BadWords foi ativado✅')
+                        reply('✅O recurso BADWORD foi ativado✅')
                     } else if (Number(args[0]) === 0) {
-                        if (!isBadWord) return reply('❎O recurso BadWords não está ativado no grupo❎')
+                        if (!isBadWord) return reply('❎O recurso BADWORD não está ativado no grupo❎')
                         let position = false
                         Object.keys(_badword).forEach((i) => {
                             if (_badword[i] === from) {
@@ -1939,9 +2041,9 @@ LISTA RANDOM:
                             _badword.splice(position, 1)
                             fs.writeFileSync('./database/data/badword.json', JSON.stringify(_badword))
                         }
-                        reply('❌O recurso BadWords foi desativado❌')
+                        reply('❌O recurso BADWORD foi desativado❌')
                     } else {
-                        reply(`Utilize o comando corretamente:\nComando: ${prefix}badword 1, para ativar e 0 para desativar`)
+                        reply(`Digite da forma correta:\nComando: ${prefix}badword 1, para ativar e 0 para desativar`)
                     }
                     break
 
@@ -1997,9 +2099,9 @@ Patente: ${patt}
 
     ❯╅╾┽┄╼❮ཤ𖢘ཥ❯╾┄┾╼╆❮
 Converse no grupo para obter XP 
-e subir de nível
+e upar seu level
   ═════◄••LEVEL••►═════`*/
-                    h0nda.sendMessage(from, leveltab(pushname, userLevel, userXp, patt), text, {
+                    tiringa.sendMessage(from, leveltab(pushname, userLevel, userXp, patt), text, {
                             quoted: mek,
                             contextInfo: {
                                 mentionedJid: [sender]
@@ -2015,12 +2117,12 @@ e subir de nível
                 case 'readallchat':
                 case 'readall':
                 case 'rall':
-                    const readallid = await h0nda.chats.all()
-                    h0nda.setMaxListeners(25)
+                    const readallid = await tiringa.chats.all()
+                    tiringa.setMaxListeners(25)
                     for (let xyz of readallid) {
-                        await h0nda.chatRead(xyz.jid)
+                        await tiringa.chatRead(xyz.jid)
                     }
-                    h0nda.sendMessage(from, `Pronto`, text, {
+                    tiringa.sendMessage(from, `Pronto`, text, {
                         quoted: {
                             key: {
                                 fromMe: false,
@@ -2054,7 +2156,7 @@ e subir de nível
                         tekkks += `~> @${block.split('@')[0]}\n`
                     }
                     tekkks += `Total: ${blocked.length}`
-                    h0nda.sendMessage(from, tekkks.trim(), extendedText, {
+                    tiringa.sendMessage(from, tekkks.trim(), extendedText, {
                         quoted: mek,
                         contextInfo: {
                             "mentionedJid": blocked
@@ -2066,7 +2168,7 @@ e subir de nível
                 case 'ocr':
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         const ocrt = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const com = await h0nda.downloadAndSaveMediaMessage(ocrt)
+                        const com = await tiringa.downloadAndSaveMediaMessage(ocrt)
                         reply(ptbr.wait())
                         addFilter(from)
                         await recognize(com, {
@@ -2101,7 +2203,7 @@ e subir de nível
                 addFilter(from)
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                        const media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                         ran = getRandom('.webp')
                         await ffmpeg(`./${media}`)
                             .input(media)
@@ -2115,9 +2217,9 @@ e subir de nível
                             })
                             .on('end', function() {
                                 console.log('Finish')
-                                exec(`webpmux -set exif ${addMetadata('h0nda-BOT', 'Italu Dev')} ${ran} -o ${ran}`, async(error) => {
+                                exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
                                     if (error) return reply(ptbr.stick())
-                                    h0nda.sendMessage(from, fs.readFileSync(ran), sticker, {
+                                    tiringa.sendMessage(from, fs.readFileSync(ran), sticker, {
                                         quoted: mek
                                     })
                                     fs.unlinkSync(media)
@@ -2129,7 +2231,7 @@ e subir de nível
                             .save(ran)
                     } else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
                         const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                        const media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                         ran = getRandom('.webp')
                         reply(ptbr.wait())
                         await ffmpeg(`./${media}`)
@@ -2148,7 +2250,7 @@ e subir de nível
                                 buff = fs.readFileSync(ran)
                                 exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
                                     if (error) return reply(ptbr.stick())
-                                    h0nda.sendMessage(from, buff, sticker, {quoted: mek})
+                                    tiringa.sendMessage(from, buff, sticker, {quoted: mek})
                                     fs.unlinkSync(media)
                                     fs.unlinkSync(ran)
                                 })
@@ -2165,7 +2267,7 @@ e subir de nível
                 addFilter(from)
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                        const media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                         ran = getRandom('.webp')
                         await ffmpeg(`./${media}`)
                             .input(media)
@@ -2179,9 +2281,9 @@ e subir de nível
                             })
                             .on('end', function() {
                                 console.log('Finish')
-                                exec(`webpmux -set exif ${addMetadata('h0nda bot', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
+                                exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
                                     if (error) return reply(ptbr.stick())
-                                    h0nda.sendMessage(from, fs.readFileSync(ran), sticker, {
+                                    tiringa.sendMessage(from, fs.readFileSync(ran), sticker, {
                                         quoted: mek
                                     })
                                     fs.unlinkSync(media)
@@ -2193,7 +2295,7 @@ e subir de nível
                             .save(ran)
                     } else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
                         const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                        const media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                         ran = getRandom('.webp')
                         reply(ptbr.wait())
                         await ffmpeg(`./${media}`)
@@ -2211,7 +2313,7 @@ e subir de nível
                                 console.log('Finish')
                                 exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${ran} -o ${ran}`, async(error) => {
                                     if (error) return reply(ptbr.stick())
-                                    h0nda.sendMessage(from, fs.readFileSync(ran), sticker, {
+                                    tiringa.sendMessage(from, fs.readFileSync(ran), sticker, {
                                         quoted: mek
                                     })
                                     fs.unlinkSync(media)
@@ -2230,7 +2332,7 @@ e subir de nível
                 addFilter(from)
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                        const media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                         rano = getRandom('.webp')
                         await ffmpeg(`./${media}`)
                             .input(media)
@@ -2245,7 +2347,7 @@ e subir de nível
                             fs.unlinkSync(media)
                             exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${rano} -o ${rano}`, async(error) => {
                                 buffer = fs.readFileSync(rano)
-                                h0nda.sendMessage(from, buffer, sticker, {
+                                tiringa.sendMessage(from, buffer, sticker, {
                                     quoted: mek
                                 })
                                 fs.unlinkSync(rano)
@@ -2253,7 +2355,7 @@ e subir de nível
                         })
                     } else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
                         const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                        const media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                         rano = getRandom('.webp')
                         reply(ptbr.waitgif())
                         await ffmpeg(`./${media}`)
@@ -2270,7 +2372,7 @@ e subir de nível
                             fs.unlinkSync(media)
                             exec(`webpmux -set exif ${addMetadata('h0nda BOT', '@h0ndaaa')} ${rano} -o ${rano}`, async(error) => {
                                 buffer = fs.readFileSync(rano)
-                                h0nda.sendMessage(from, buffer, sticker, {
+                                tiringa.sendMessage(from, buffer, sticker, {
                                     quoted: mek
                                 })
                                 fs.unlinkSync(rano)
@@ -2284,11 +2386,11 @@ e subir de nível
                     //_VOZ DO GOOGLE
                 case 'tts':
                 addFilter(from)
-                    if (args.length < 1) return h0nda.sendMessage(from, `Você deve usar o comando da forma correta:\n${prefix}tts (língua) (texto)\nExemplo: ${prefix}tts pt bom dia\n\nUse: ${prefix}ts para listar todas as línguas`, text, {
+                    if (args.length < 1) return tiringa.sendMessage(from, `Você deve usar o comando da forma correta:\n${prefix}tts (língua) (texto)\nExemplo: ${prefix}tts pt bom dia\n\nUse: ${prefix}ts para listar todas as línguas`, text, {
                         quoted: mek
                     })
                     const gtts = require('./lib/gtts')(args[0])
-                    if (args.length < 2) return h0nda.sendMessage(from, 'Cadê o texto?', text, {
+                    if (args.length < 2) return tiringa.sendMessage(from, 'Cadê o texto?', text, {
                         quoted: mek
                     })
                     dtt = body.slice(8)
@@ -2296,7 +2398,7 @@ e subir de nível
                     dtt.length > 800 ?
                         reply('Texto muito grande') :
                         gtts.save(ranm, dtt, function() {
-                            h0nda.sendMessage(from, fs.readFileSync(ranm), audio, {
+                            tiringa.sendMessage(from, fs.readFileSync(ranm), audio, {
                                 quoted: mek,
                                 mimetype: 'audio/mp4',
                                 ptt: true
@@ -2309,13 +2411,13 @@ e subir de nível
                     reply(stat)
                     break
 
-                case 'maiores18':
+                case 'm18':
                     if (!isNsfw) return reply(ptbr.nsfw())
-                    costum(maiores18(pushname, prefix), text, tescuk, crh)
+                    costum(m18(pushname, prefix), text, tescuk, crh)
                     break
 
                 case 'quando': //by: Resen
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (args.length < 1) return reply('Digite a pergunta')
                     random = arrayQND[Math.floor(Math.random() * arrayQND.length)]
                     random2 = `${Math.floor(Math.random() * 11) + 1}`
@@ -2334,7 +2436,7 @@ e subir de nível
                 case 'gato':
                     reply(ptbr.wait())
                     buffer = await getBuffer(`https://cataas.com/cat`)
-                    h0nda.sendMessage(from, buffer, image, {
+                    tiringa.sendMessage(from, buffer, image, {
                         quoted: mek,
                         caption: '🐱'
                     })
@@ -2346,7 +2448,7 @@ e subir de nível
                     reply(ptbr.wait())
                     say = body.slice(8)
                     buffer = await getBuffer(`https://cataas.com/cat/says/${say}`)
-                    h0nda.sendMessage(from, buffer, image, {
+                    tiringa.sendMessage(from, buffer, image, {
                         quoted: mek,
                         caption: `${say}`
                     })
@@ -2356,7 +2458,7 @@ e subir de nível
                 case 'bomdia':
                     reply(ptbr.wait())
                     buffer = await getBuffer(`https://cataas.com/cat/says/Bom%20Dia`)
-                    h0nda.sendMessage(from, buffer, image, {
+                    tiringa.sendMessage(from, buffer, image, {
                         quoted: mek,
                         caption: 'Bom dia grupo'
                     })
@@ -2365,7 +2467,7 @@ e subir de nível
                 case 'boatarde':
                     reply(ptbr.wait())
                     buffer = await getBuffer(`https://cataas.com/cat/says/Boa%20Tarde`)
-                    h0nda.sendMessage(from, buffer, image, {
+                    tiringa.sendMessage(from, buffer, image, {
                         quoted: mek,
                         caption: 'Boa tarde grupo'
                     })
@@ -2374,7 +2476,7 @@ e subir de nível
                 case 'boanoite':
                     reply(ptbr.wait())
                     buffer = await getBuffer(`https://cataas.com/cat/sleep/says/Boa%20Noite`)
-                    h0nda.sendMessage(from, buffer, image, {
+                    tiringa.sendMessage(from, buffer, image, {
                         quoted: mek,
                         caption: 'Boa noite grupo'
                     })
@@ -2395,7 +2497,7 @@ e subir de nível
                 case 'bugreport':
                     const bug = body.slice(10)
                     if (args.length <= 1) return reply(`Exemplo: ${prefix}bugreport "ocorreu um erro no comando sticker"`)
-                    if (args.length >= 300) return h0nda.sendMessage(from, 'Máximo 300 caracteres', msgType.text, {
+                    if (args.length >= 300) return tiringa.sendMessage(from, 'Máximo 300 caracteres', msgType.text, {
                         quoted: mek
                     })
                     var nomor = mek.participant
@@ -2406,7 +2508,7 @@ e subir de nível
                             mentionedJid: [sender]
                         },
                     }
-                    h0nda.sendMessage('351927438657@s.whatsapp.net', options, text, {
+                    tiringa.sendMessage('557499510904@s.whatsapp.net', options, text, {
                         quoted: mek
                     })
                     reply("Mensagem enviada ao meu dono; Spam = block + ban.")
@@ -2415,7 +2517,7 @@ e subir de nível
 
                 case 'request':
                     const pesann = body.slice(8)
-                    if (args.length > 300) return h0nda.sendMessage(from, 'Máximo 300 caracteres', msgType.text, {
+                    if (args.length > 300) return tiringa.sendMessage(from, 'Máximo 300 caracteres', msgType.text, {
                         quoted: mek
                     })
                     var nomor = mek.participant
@@ -2426,7 +2528,7 @@ e subir de nível
                             mentionedJid: [sender]
                         },
                     }
-                    h0nda.sendMessage('351927438657@s.whatsapp.net', options, text, {
+                    tiringa.sendMessage('351927438657@s.whatsapp.net', options, text, {
                         quoted: mek
                     })
                     reply("Mensagem enviada ao meu dono; Spam = block + ban.")
@@ -2440,8 +2542,8 @@ e subir de nível
                             method: 'get'
                         })
                         if (anu.error) return reply('Não sei ler o que não existe 🐤 (converse cmg)')
-                        if (anu.success == "Limit 600 queries per hour.") return reply('Limite atingido... \nVocê mandou 600 mensagens para o simi, volte a tentar daqui a 1 hora')
-                        h0nda.sendMessage(from, `${anu.success} 🐤`, text, {
+                        if (anu.success == "Limit 500 queries per hour.") return reply('Limite atingido... \nTente novamente mais tarde')
+                        tiringa.sendMessage(from, `${anu.success} 🐤`, text, {
                             quoted: mek
                         })
                     } catch {
@@ -2459,15 +2561,15 @@ e subir de nível
                 case 'clima':
                 case 'tempo':
                     anu = await getBuffer(`https://api.apiflash.com/v1/urltoimage?access_key=57fcd6384cff4e529b9ca76089f05992&url=https://pt.wttr.in/${args[0]}`)
-                    h0nda.sendMessage(from, anu, image, {
+                    tiringa.sendMessage(from, anu, image, {
                         quoted: mek
                     })
                     addFilter(from)
                     break
 
-                case 'menusecretokk':
+                case 'mz24':
                     if (!isZ24) return reply('Comando exclusivo z24')
-                    costum(menusecretokk(prefix), text, tescuk, cr)
+                    costum(mz24(prefix), text, tescuk, cr)
                     break
 
                 case 'hora':
@@ -2478,15 +2580,15 @@ e subir de nível
                     break
 
                     //_GIT DO BOT
-                case 'gigjdfjgfdjt':
-                    h0nda.sendMessage(from, `https://github.com/italuH/h0nda-BOT`, text, {
+                case 'git':
+                    tiringa.sendMessage(from, `https://github.com/italuH/Tiringa-BOT`, text, {
                         quoted: mek
                     })
                     addFilter(from)
                     break
 
-                case 'exthhuhfsjjdsjaeam':
-                    h0nda.sendMessage(from, `https://api-exteam.herokuapp.com/`, text, {
+                case 'exteam':
+                    tiringa.sendMessage(from, `https://api-exteam.herokuapp.com/`, text, {
                         quoted: mek
                     })
                     addFilter(from)
@@ -2495,7 +2597,7 @@ e subir de nível
                 case 'macumba':
                     pedido = body.slice(8)
                     buf = fs.readFileSync(`./src/macu.mp4`)
-                    h0nda.sendMessage(from, buf, video, {
+                    tiringa.sendMessage(from, buf, video, {
                         quoted: mek
                     })
                     addFilter(from)
@@ -2509,11 +2611,11 @@ e subir de nível
                         const aMimirMp3 = fs.readFileSync('./src/acorda.mp3')
                         const aMimirSt = fs.readFileSync('./src/sonic.webp')
                         for (let _ of groupMembers) {
-                            h0nda.sendMessage(_.jid, aMimirMp3, MessageType.audio, {
+                            tiringa.sendMessage(_.jid, aMimirMp3, MessageType.audio, {
                                 mimetype: 'audio/mp4',
                                 ptt: true
                             })
-                            h0nda.sendMessage(_.jid, aMimirSt, sticker)
+                            tiringa.sendMessage(_.jid, aMimirSt, sticker)
                         }
                         ammOff = "on"
                     } else if ( /*horaAtual != '08:42' && */ autoHourActivate == "on") {
@@ -2522,10 +2624,10 @@ e subir de nível
                     break
 
                     //_ENVIA OS ARQUIVOS .JSON By: Resen 
-                case 'jswvbhtywxs':
+                case 'jsonfiles':
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
                     const daftarfile = fs.readFileSync('./database/json/daftar.json')
-                    h0nda.sendMessage(from, daftarfile, document, {
+                    tiringa.sendMessage(from, daftarfile, document, {
                         mimetype: 'json',
                         filename: 'daftar.json'
                     })
@@ -2582,7 +2684,7 @@ e subir de nível
                     var pc = body.slice(6)
                     var nomor = pc.split("|")[0];
                     var pesan = pc.split("|")[1];
-                    h0nda.sendMessage(nomor + '@s.whatsapp.net', pesan, text)
+                    tiringa.sendMessage(nomor + '@s.whatsapp.net', pesan, text)
                     addFilter(from)
                     break
 
@@ -2590,15 +2692,15 @@ e subir de nível
                     addFilter(from)
                     if (args.length < 1) return reply(`Use dessa forma:\nComando: ${prefix}attp Toin gado`)
                     attp2 = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURIComponent(body.slice(6))}`)
-                    h0nda.sendMessage(from, attp2, sticker, {
+                    tiringa.sendMessage(from, attp2, sticker, {
                         quoted: mek
                     })
                     break
 
                 case 'pão':
-                    if (isOwner) return reply('Oi h0nda')
+                    if (isOwner) return reply('Oi Italu')
                     else {
-                        reply('Oi membro')
+                        reply('Oi membro comum')
                     }
                     break
 
@@ -2606,9 +2708,9 @@ e subir de nível
                 case 'criador':
                 case 'vcard':
                 case 'owner':
-                case 'number':
-                case 'contacto':
-                    await h0nda.sendMessage(from, {
+                case 'honda':
+                case 'h0nda':
+                    await tiringa.sendMessage(from, {
                         displayname: "h0nda",
                         vcard: vcard
                     }, MessageType.contact)
@@ -2617,11 +2719,11 @@ e subir de nível
 
                 case 'ownergrup':
                 case 'ownergroup':
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     options = {
                         text: `Dono do grupo: @${from.split("-")[0]}`,
                     }
-                    h0nda.sendMessage(from, options, text, {
+                    tiringa.sendMessage(from, options, text, {
                         quoted: mek,
                         contextInfo: {
                             mentionedJid: [from]
@@ -2634,13 +2736,13 @@ e subir de nível
 
                 case 'testime':
                     setTimeout(() => {
-                        h0nda.sendMessage(from, 'O tempo acabou', text)
+                        tiringa.sendMessage(from, 'O tempo acabou', text)
                     }, 10000)
                     setTimeout(() => {
-                        h0nda.sendMessage(from, '5 segundos restantes', text)
+                        tiringa.sendMessage(from, '5 segundos restantes', text)
                     }, 5000)
                     setTimeout(() => {
-                        h0nda.sendMessage(from, '10 segundos restantes', text)
+                        tiringa.sendMessage(from, '10 segundos restantes', text)
                     }, 0)
                     addFilter(from)
                     break
@@ -2679,9 +2781,9 @@ e subir de nível
                         axios.get(`https://nekos.life/api/v2/img/meow`).then((res) => {
                             imageToBase64(res.data.url).then((response) => {
                                 var buf = Buffer.from(response, 'base64');
-                                h0nda.sendMessage(from, buf, image, {
+                                tiringa.sendMessage(from, buf, image, {
                                     quoted: mek,
-                                    caption: "miauuu🐱"
+                                    caption: "🐱"
                                 })
                             })
                         })
@@ -2700,7 +2802,7 @@ e subir de nível
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -2716,11 +2818,11 @@ e subir de nível
                     pm2 = `pm2 kill`
                     reply('A mimir...')
                     exec(pm2, (err, stdout) => {
-                        if (err) return h0nda.sendMessage(from, "Erro", text, {
+                        if (err) return tiringa.sendMessage(from, "Erro", text, {
                             quoted: mek
                         })
                         if (stdout) {
-                            h0nda.sendMessage(from, stdout, text, {
+                            tiringa.sendMessage(from, stdout, text, {
                                 quoted: mek
                             })
                         }
@@ -2732,11 +2834,11 @@ e subir de nível
                     npm = `npm start`
                     reply('Reiniciando em alguns segundos...')
                     exec(npm, (err, stdout) => {
-                        if (err) return h0nda.sendMessage(from, "Erro", text, {
+                        if (err) return tiringa.sendMessage(from, "Erro", text, {
                             quoted: mek
                         })
                         if (stdout) {
-                            h0nda.sendMessage(from, stdout, text, {
+                            tiringa.sendMessage(from, stdout, text, {
                                 quoted: mek
                             })
                         }
@@ -2758,12 +2860,12 @@ e subir de nível
                 case 'togif': // by lindow
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        const mediaaa = await h0nda.downloadAndSaveMediaMessage(encmediaaa)
+                        const mediaaa = await tiringa.downloadAndSaveMediaMessage(encmediaaa)
                         reply(ptbr.wait())
                         addFilter(from)
                         a = await webp2gifFile(mediaaa)
                         mp4 = await getBuffer(a.result)
-                        h0nda.sendMessage(from, mp4, MessageType.video, {
+                        tiringa.sendMessage(from, mp4, MessageType.video, {
                             mimetype: 'video/gif',
                             filename: `stick.gif`,
                             quoted: mek,
@@ -2777,7 +2879,7 @@ e subir de nível
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
                     reply('Desligando em 3 segundos....')
                     setTimeout(() => {
-                        h0nda.close()
+                        tiringa.close()
                     }, 3000)
                     break
 
@@ -2791,9 +2893,9 @@ e subir de nível
                     })
                     if (anu.error) return reply(anu.error)
                     buff = await getBuffer(anu.image)
-                    h0nda.sendMessage(from, buff, image, {
+                    tiringa.sendMessage(from, buff, image, {
                         quoted: mek,
-                        caption: '✏'
+                        caption: '✏📕'
                     })
                     addFilter(from)
                     break
@@ -2811,25 +2913,25 @@ e subir de nível
                     const regin = getRegisterName(sender)
                     const requirXp = 500 * (Math.pow(2, usLevel) - 1)
                     try {
-                        ppimg = await h0nda.getProfilePicture(`${sender.split('@')[0]}@c.us`)
+                        ppimg = await tiringa.getProfilePicture(`${sender.split('@')[0]}@c.us`)
                     } catch {
                         ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                     }
                     const pf =
                         `
-  ⇾ Nome: @${sender.split("@")[0]}
-  ⇾ Registrado: ✅
-  ⇾ Idade: ${idad}
-  ⇾ Nome de registro: ${regin}
-  ⇾ Registrado desde: ${usTime}
-  ⇾ Level: ${usLevel}
-  ⇾ XP: ${usXp}/${requirXp}
-  ⇾ Patente: ${patt}
-  ⇾ link: wa.me/${sender.split("@")[0]}
-  ⇾ Código: ${serh}
+  *◍₊ิ۪͡୭⇾ Nome: @${sender.split("@")[0]}
+  *◍₊ิ۪͡୭⇾ Registrado: ✅
+  *◍₊ิ۪͡୭⇾ Idade: ${idad}
+  *◍₊ิ۪͡୭⇾ Nome de registro: ${regin}
+  *◍₊ิ۪͡୭⇾ Registrado desde: ${usTime}
+  *◍₊ิ۪͡୭⇾ Level: ${usLevel}
+  *◍₊ิ۪͡୭⇾ XP: ${usXp}/${requirXp}
+  *◍₊ิ۪͡୭⇾ Patente: ${patt}
+  *◍₊ิ۪͡୭⇾ link: wa.me/${sender.split("@")[0]}
+  *◍₊ิ۪͡୭⇾ Código: ${serh}
 `
                     its = await getBuffer(ppimg)
-                    h0nda.sendMessage(from, its, image, {
+                    tiringa.sendMessage(from, its, image, {
                         quoted: mek,
                         caption: pf,
                         contextInfo: {
@@ -2846,13 +2948,13 @@ e subir de nível
                 addFilter(from)
                     if (!isQuotedAudio) return reply('Marque um áudio')
                     encmmmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    media = await h0nda.downloadAndSaveMediaMessage(encmmmedia)
+                    media = await tiringa.downloadAndSaveMediaMessage(encmmmedia)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${media} -filter:a atempo=1.06,asetrate=44100*1.25 ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(media)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -2866,13 +2968,13 @@ e subir de nível
                     addFilter(from)
                     if (!isQuotedAudio) return reply('Marque um áudio')
                     low = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    slo = await h0nda.downloadAndSaveMediaMessage(low)
+                    slo = await tiringa.downloadAndSaveMediaMessage(low)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${slo} -filter:a "atempo=0.5,asetrate=44100" ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(slo)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -2886,13 +2988,13 @@ e subir de nível
                     addFilter(from)
                     if (!isQuotedAudio) return reply('Marque um áudio')
                     pai = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    tup = await h0nda.downloadAndSaveMediaMessage(pai)
+                    tup = await tiringa.downloadAndSaveMediaMessage(pai)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${tup} -filter:a "atempo=0.7,asetrate=65100" ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(tup)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -2906,13 +3008,13 @@ e subir de nível
                     addFilter(from)
                     if (!isQuotedAudio) return reply('Marque um áudio')
                     muk = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    gem = await h0nda.downloadAndSaveMediaMessage(muk)
+                    gem = await tiringa.downloadAndSaveMediaMessage(muk)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${gem} -filter:a "atempo=1.6,asetrate=22100" ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(gem)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -2926,13 +3028,13 @@ e subir de nível
                 addFilter(from)
                     if (!isQuotedAudio) return reply('Marque um áudio')
                     encmediiiaa = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    media = await h0nda.downloadAndSaveMediaMessage(encmediiiaa)
+                    media = await tiringa.downloadAndSaveMediaMessage(encmediiiaa)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${media} -filter:a "atempo=0.9,asetrate=95100" ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(media)
                         if (err) return reply('Erro')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -2947,13 +3049,13 @@ e subir de nível
                     addFilter(from)
                     if (!isQuotedAudio) return reply('Marque um áudio')
                     ass = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    bas = await h0nda.downloadAndSaveMediaMessage(ass)
+                    bas = await tiringa.downloadAndSaveMediaMessage(ass)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${bas} -af equalizer=f=30:width_type=o:width=2:g=15 ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(bas)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -2968,13 +3070,13 @@ e subir de nível
                     addFilter(from)
                     if (!isQuotedAudio) return reply('Marque um áudio')
                     ass = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    bas = await h0nda.downloadAndSaveMediaMessage(ass)
+                    bas = await tiringa.downloadAndSaveMediaMessage(ass)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${bas} -af equalizer=f=90:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(bas)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -2990,7 +3092,7 @@ e subir de nível
                 case 'infogrup':
                 case 'grupinfo':*/
                     addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (!isGroup) return reply(ptbr.group())
                     let {
                         owner,
@@ -3000,7 +3102,7 @@ e subir de nível
                     } = groupMetadata;
                     const creationTime = moment.unix(creation);
                     try {
-                        ppUrl = await h0nda.getProfilePicture(from)
+                        ppUrl = await tiringa.getProfilePicture(from)
                     } catch {
                         ppUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
                     }
@@ -3012,7 +3114,7 @@ e subir de nível
   *◍₊ิ۪͡୭⇾Total de administradores: ${groupAdmins.length}
   *◍₊ิ۪͡୭⇾Criador : @${owner.split('@')[0]}
   *◍₊ิ۪͡୭⇾Total de membros: ${participants.length} membros`
-                    await h0nda.sendMessage(from, buffer, image, {
+                    await tiringa.sendMessage(from, buffer, image, {
                         quoted: mek,
                         caption: infogp,
                         contextInfo: {
@@ -3027,8 +3129,8 @@ e subir de nível
                     addFilter(from)
                     const timestamp = speed();
                     const latensi = speed() - timestamp
-                    h0nda.updatePresence(from, Presence.composing)
-                    h0nda.sendMessage(from, `Pong!\nPing: ${latensi.toFixed(4)} segundos\n`, text, {
+                    tiringa.updatePresence(from, Presence.composing)
+                    tiringa.sendMessage(from, `Pong!\nTempo de resposta: ${latensi.toFixed(4)} segundos\n`, text, {
                         quoted: mek
                     })
                     break
@@ -3040,7 +3142,7 @@ e subir de nível
                     addFilter(from)
                     coito = body.slice(command.length + 2)
                     if (args.length < 1) return reply('Digite o comando juntamente com o que você deseja buscar')
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     reply(ptbr.wait())
                     try {
                         data = await fetchJson(`https://api.fdci.se/sosmed/rep.php?gambar=${coito}`, {
@@ -3049,7 +3151,7 @@ e subir de nível
                         n = JSON.parse(JSON.stringify(data));
                         nimek = n[Math.floor(Math.random() * n.length)];
                         pok = await getBuffer(nimek)
-                        h0nda.sendMessage(from, pok, image, {
+                        tiringa.sendMessage(from, pok, image, {
                             quoted: mek
                         })
                     } catch {
@@ -3062,8 +3164,8 @@ e subir de nível
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
                     addFilter(from)
                     let ido = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : from
-                    let online = [...Object.keys(h0nda.chats.get(ido).presences), h0nda.user.jid]
-                    h0nda.sendMessage(from, 'Lista de usuários online:\n' + online.map(v => '- @' + v.replace(/@.+/, '')).join `\n`, text, {
+                    let online = [...Object.keys(tiringa.chats.get(ido).presences), tiringa.user.jid]
+                    tiringa.sendMessage(from, 'Lista de usuários online:\n' + online.map(v => '- @' + v.replace(/@.+/, '')).join `\n`, text, {
                         quoted: mek,
                         contextInfo: {
                             mentionedJid: online
@@ -3074,7 +3176,7 @@ e subir de nível
                     //_NEKOS PINTEREST
                 case 'neko':
                     addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     uk = ["anime neko"]
                     nk = uk[Math.floor(Math.random() * uk.length)]
                     try {
@@ -3085,7 +3187,7 @@ e subir de nível
                         n = JSON.parse(JSON.stringify(data));
                         nimek = n[Math.floor(Math.random() * n.length)];
                         pok = await getBuffer(nimek)
-                        h0nda.sendMessage(from, pok, image, {
+                        tiringa.sendMessage(from, pok, image, {
                             quoted: mek,
                             caption: `nyan`
                         })
@@ -3097,7 +3199,7 @@ e subir de nível
                     //_LOLIS PINTEREST
                 case 'loli':
                     addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     uk = ["anime loli"]
                     nk = uk[Math.floor(Math.random() * uk.length)]
                     try {
@@ -3108,7 +3210,7 @@ e subir de nível
                         n = JSON.parse(JSON.stringify(data));
                         nimek = n[Math.floor(Math.random() * n.length)];
                         pok = await getBuffer(nimek)
-                        h0nda.sendMessage(from, pok, image, {
+                        tiringa.sendMessage(from, pok, image, {
                             quoted: mek,
                             caption: `nii?`
                         })
@@ -3121,7 +3223,7 @@ e subir de nível
                 case 'shitpost':
                 case 'shit':
                     addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     uk = ["shitpost br"]
                     nk = uk[Math.floor(Math.random() * uk.length)]
                     try {
@@ -3132,7 +3234,7 @@ e subir de nível
                         n = JSON.parse(JSON.stringify(data));
                         nimek = n[Math.floor(Math.random() * n.length)];
                         pok = await getBuffer(nimek)
-                        h0nda.sendMessage(from, pok, image, {
+                        tiringa.sendMessage(from, pok, image, {
                             quoted: mek,
                             caption: `إذا قمت بترجمة هذا فأنت سارق🤣👆`
                         })
@@ -3144,14 +3246,11 @@ e subir de nível
                     //_ANIME PINTEREST
                 case 'anime':
                     addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     am = ["anime tumblr",
                         "wallpaper anime hd",
                         "anime aestethic",
-                        "anime hd",
-                        "anime aesthetic icons",
-                        "anime icons boy",
-                        "anime death note icon" 
+                        "anime hd"
                     ]
                     nk = am[Math.floor(Math.random() * am.length)]
                     data = await fetchJson(`https://api.fdci.se/sosmed/rep.php?gambar=${nk}`, {
@@ -3161,7 +3260,7 @@ e subir de nível
                     n = JSON.parse(JSON.stringify(data));
                     nimek = n[Math.floor(Math.random() * n.length)];
                     pok = await getBuffer(nimek)
-                    h0nda.sendMessage(from, pok, image, {
+                    tiringa.sendMessage(from, pok, image, {
                         quoted: mek,
                         caption: `💮`
                     })
@@ -3171,7 +3270,7 @@ e subir de nível
                 case 'wp':
                 case 'wallpaper':
                     addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     pw = ["wallpaper aestethic",
                         "wallpaper tumblr",
                         "wallpaper lucu",
@@ -3186,7 +3285,7 @@ e subir de nível
                         n = JSON.parse(JSON.stringify(data));
                         nimek = n[Math.floor(Math.random() * n.length)];
                         pok = await getBuffer(nimek)
-                        h0nda.sendMessage(from, pok, image, {
+                        tiringa.sendMessage(from, pok, image, {
                             quoted: mek,
                             caption: `Gostou do que escolhi?`
                         })
@@ -3198,7 +3297,7 @@ e subir de nível
                 case 'nomeninja':
                     addFilter(from)
                     if (args.length < 1) return reply(`Exemplo: ${prefix}nomeninja italu`)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     nome = body.slice(10)
                     try {
                         data = await fetchJson(`https://api.terhambar.com/ninja?nama=${nome}`)
@@ -3372,21 +3471,21 @@ e subir de nível
                     }
                     break
 
-                case 'hondamenu':
+                case 'z24':
                     if (!isGroup) return reply(ptbr.group())
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
-                    if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}hondamenu 1, para ativar e 0 para desativar`)
+                    if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}z24 1, para ativar e 0 para desativar`)
                     if (Number(args[0]) === 1) {
-                        if (isZ24) return reply('❎comandos honda já estão ativos❎')
-                        honda.push(`${from}`)
+                        if (isZ24) return reply('❎comandos z24 já estão ativos❎')
+                        z24.push(`${from}`)
                         fs.writeFileSync('./database/data/zm.json', JSON.stringify(z24))
-                        reply('✅comandos honda ativados nesse grupo✅')
+                        reply('✅comandos z24 ativados nesse grupo✅')
                     } else if (Number(args[0]) === 0) {
-                        honda.splice(`${from}`)
+                        z24.splice(`${from}`)
                         fs.writeFileSync('./database/data/zm.json', JSON.stringify(z24))
                         reply('❌comandos z24 desativados nesse grupo❌')
                     } else {
-                        reply(`Digite da forma correta:\nComando: ${prefix}honda 1, para ativar e 0 para desativar`)
+                        reply(`Digite da forma correta:\nComando: ${prefix}z24 1, para ativar e 0 para desativar`)
                     }
                     break
 
@@ -3395,8 +3494,8 @@ e subir de nível
                     if (!isGroupAdmins) return reply(ptbr.admin())
                     if (!isBotGroupAdmins) return reply(ptbr.Badmin())
                     const ftgp = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                    const medipp = await h0nda.downloadAndSaveMediaMessage(ftgp)
-                    await h0nda.updateProfilePicture(from, medipp)
+                    const medipp = await tiringa.downloadAndSaveMediaMessage(ftgp)
+                    await tiringa.updateProfilePicture(from, medipp)
                     reply('✅foto do grupo alterada✅')
                     break
 
@@ -3408,7 +3507,7 @@ e subir de nível
                         ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.waitimg())
                     addFilter(from)
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ger)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ger)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         imgtrg = `${anu.display_url}`
                         ranp = getRandom('.gif')
@@ -3418,7 +3517,7 @@ e subir de nível
                             fs.unlinkSync(ranp)
                             if (err) return reply(ptbr.stick())
                             nobg = fs.readFileSync(rano)
-                            h0nda.sendMessage(from, nobg, sticker, {
+                            tiringa.sendMessage(from, nobg, sticker, {
                                 quoted: mek
                             })
                             fs.unlinkSync(rano)
@@ -3433,7 +3532,7 @@ e subir de nível
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ger)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ger)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         imurl = `${anu.display_url}`
                         reply(imurl)
@@ -3446,11 +3545,11 @@ e subir de nível
                         ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.waitimg())
                     addFilter(from)
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ger)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ger)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         imgwas = `${anu.display_url}`
                         hehe = await getBuffer(`https://some-random-api.ml/canvas/wasted?avatar=${imgwas}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -3464,11 +3563,11 @@ e subir de nível
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.waitimg())
                     addFilter(from)
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(7)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/pencil/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -3484,10 +3583,10 @@ e subir de nível
                         wtext = body.slice(7)
                         reply(ptbr.waitimg())
                     addFilter(from)
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/wanted/?urlgbr=${anu.display_url}&text1=${wtext}&text2=10000`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -3502,7 +3601,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/bneon?apikey=${ZeksKey}&text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3514,7 +3613,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://docs-jojo.herokuapp.com/api/neon_light?text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3526,7 +3625,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/matrix?apikey=${ZeksKey}&text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3538,7 +3637,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/breakwall?apikey=${ZeksKey}&text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3550,7 +3649,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/dropwater?apikey=${ZeksKey}&text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3564,7 +3663,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/wolflogo?apikey=${ZeksKey}&text1=${tx1}&text2=${tx2}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3577,7 +3676,7 @@ e subir de nível
                     addFilter(from)
                     hehe = fetchJson(`https://api.zeks.xyz/api/flowertext?text=${pc}&apikey=${ZeksKey}`)
                     heh = await getBuffer(hehe.result)
-                    h0nda.sendMessage(from, heh, image, {
+                    tiringa.sendMessage(from, heh, image, {
                         quoted: mek
                     })
                     break
@@ -3589,7 +3688,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://videfikri.com/api/textmaker/lovemek/?text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3600,7 +3699,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/tfire?text=${pc}&apikey=${ZeksKey}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3611,7 +3710,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/sandw?apikey=${ZeksKey}&text=${pc}`)
-                    h0ndaa.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3622,7 +3721,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/epep?text=${pc}&apikey=${ZeksKey}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3633,7 +3732,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/text3dbox?apikey=${ZeksKey}&text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3644,7 +3743,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/text3d?text=${pc}&apikey=${ZeksKey}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3658,7 +3757,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/phlogo?text1=${tx1}&text2=${tx2}&apikey=${ZeksKey}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3669,7 +3768,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/logobp?text=${pc}&apikey=${ZeksKey}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3680,7 +3779,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/leavest?text=${pc}&apikey=${ZeksKey}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3691,7 +3790,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://api.zeks.xyz/api/tlight?text=${pc}&apikey=${ZeksKey}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3702,7 +3801,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://videfikri.com/api/textmaker/narutobanner/?text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3713,7 +3812,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://videfikri.com/api/textmaker/romancetext/?text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3724,7 +3823,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://videfikri.com/api/textmaker/shadowtext/?text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3740,7 +3839,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://videfikri.com/api/textmaker/tiktokeffect/?text1=${nomor}&text2=${pesan}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3752,7 +3851,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://videfikri.com/api/textmaker/glowingneon/?text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3763,7 +3862,7 @@ e subir de nível
                     reply(ptbr.waitimg())
                     addFilter(from)
                     hehe = await getBuffer(`https://videfikri.com/api/textmaker/hpotter/?text=${pc}`)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3778,7 +3877,7 @@ e subir de nível
   *◍₊ิ۪͡୭⇾ Cep: ${hehe.cep}
   *◍₊ิ۪͡୭⇾ Estado: ${hehe.state}
   *◍₊ิ۪͡୭⇾ Cidade: ${hehe.city}`
-                    h0nda.sendMessage(from, ccg, text, {
+                    tiringa.sendMessage(from, ccg, text, {
                         quoted: mek
                     })
                     break
@@ -3795,7 +3894,7 @@ e subir de nível
    *◍₊ิ۪͡୭⇾ Pin: ${hehe.result.card.pin}
    *◍₊ิ۪͡୭⇾ Balanço: ${hehe.result.card.balance}
    *◍₊ิ۪͡୭⇾ Validade: ${hehe.result.card.expiration_month}/${hehe.result.card.expiration_year}`
-                    h0nda.sendMessage(from, ccg, text, {
+                    tiringa.sendMessage(from, ccg, text, {
                         quoted: mek
                     })
                     break
@@ -3811,7 +3910,7 @@ e subir de nível
                     addFilter(from)
                         haha = await fetchJson(`https://api.zeks.xyz/api/snowwrite?text1=${tx1}&text2=${tx2}&apikey=${ZeksKey}`)
                         hehe = await getBuffer(haha.result)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3828,7 +3927,7 @@ e subir de nível
                     addFilter(from)
                         haha = await fetchJson(`https://api.zeks.xyz/api/crismes?text=${pc}&apikey=${ZeksKey}`)
                         hehe = await getBuffer(haha.result)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3847,7 +3946,7 @@ e subir de nível
                     addFilter(from)
                         haha = await fetchJson(`https://api.zeks.xyz/api/pubglogo?text1=${tx1}&text2=${tx2}&apikey=${ZeksKey}`)
                         hehe = await getBuffer(haha.result)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3865,7 +3964,7 @@ e subir de nível
                         reply(ptbr.waitimg())
                     addFilter(from)
                         haha = await getBuffer(`https://videfikri.com/api/textmaker/bf4/?text1=${tx1}&text2=${tx2}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3879,7 +3978,7 @@ e subir de nível
                     try {
                         hah = await fetchJson(`https://kagchi-api.glitch.me//waifu/nezuko`)
                         hehe = await getBuffer(hah.url)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3896,7 +3995,7 @@ e subir de nível
                     addFilter(from)
                         haha = await fetchJson(`https://api.zeks.xyz/api/cslogo?text=${pc}&apikey=${ZeksKey}`)
                         hehe = await getBuffer(haha.result)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3913,7 +4012,7 @@ e subir de nível
                     addFilter(from)
                         haha = await fetchJson(`https://api.zeks.xyz/api/lithgtext?text=${pc}&apikey=${ZeksKey}`)
                         hehe = await getBuffer(haha.result)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3930,7 +4029,7 @@ e subir de nível
                     addFilter(from)
                         haha = await fetchJson(`https://api.zeks.xyz/api/silktext?text=${pc}&apikey=${ZeksKey}`)
                         hehe = await getBuffer(haha.result)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3947,7 +4046,7 @@ e subir de nível
                     addFilter(from)
                         haha = await fetchJson(`https://api.zeks.xyz/api/flametext?text=${pc}&apikey=${ZeksKey}`)
                         hehe = await getBuffer(haha.result)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } catch (e) {
@@ -3963,7 +4062,7 @@ e subir de nível
                     addFilter(from)
                     haha = await fetchJson(`https://api.zeks.xyz/api/glowtext?text=${pc}&apikey=${ZeksKey}`)
                     hehe = await getBuffer(haha.result)
-                    h0nda.sendMessage(from, hehe, image, {
+                    tiringa.sendMessage(from, hehe, image, {
                         quoted: mek
                     })
                     break
@@ -3977,7 +4076,7 @@ e subir de nível
                         haha = await fetchJson(`https://api.zeks.xyz/api/crosslogo?text=${pc}&apikey=${ZeksKey}`)
                         hehe = await getBuffer(haha.result)
                         setTimeout(() => {
-                            h0ndaa.sendMessage(from, hehe, image, {
+                            tiringa.sendMessage(from, hehe, image, {
                                 quoted: mek
                             })
                         }, 10000)
@@ -3992,11 +4091,11 @@ e subir de nível
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(7)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/gtavposter/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -4006,14 +4105,14 @@ e subir de nível
 
                 case 'wa.me':
                 case 'wame':
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     options = {
                         text: `Seu link wa.me: wa.me/${sender.split("@s.whatsapp.net")[0]}\nOu: \napi.whatsapp.com/send?phone=${sender.split("@")[0]}`,
                         contextInfo: {
                             mentionedJid: [sender]
                         }
                     }
-                    h0nda.sendMessage(from, options, text, {
+                    tiringa.sendMessage(from, options, text, {
                         quoted: mek
                     })
                     break
@@ -4021,11 +4120,11 @@ e subir de nível
                 case 'notif':
                 addFilter(from)
                     if (!isGroupAdmins) return reply(ptbr.admin())
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (!isGroup) return reply(ptbr.group())
-                    if (args.length < 1) return h0nda.reply('escreva algo como aviso')
+                    if (args.length < 1) return tiringa.reply('escreva algo como aviso')
                     aviso = `Aviso de: @${sender.split("@")[0]}\n\nAviso: ${body.slice(7)}`
-                    group = await h0nda.groupMetadata(from);
+                    group = await tiringa.groupMetadata(from);
                     member = group['participants']
                     jids = [];
                     member.map(async adm => {
@@ -4038,7 +4137,7 @@ e subir de nível
                         },
                         quoted: mek
                     }
-                    await h0nda.sendMessage(from, options, text)
+                    await tiringa.sendMessage(from, options, text)
                     break
 
                     //_TE MENCIONA
@@ -4049,7 +4148,7 @@ e subir de nível
                             mentionedJid: [sender]
                         }
                     }
-                    h0nda.sendMessage(from, tagme, text)
+                    tiringa.sendMessage(from, tagme, text)
                     addFilter(from)
                     break
 
@@ -4065,7 +4164,7 @@ e subir de nível
    *◍₊ิ۪͡୭⇾ E-mail: ${anu.email}
    *◍₊ิ۪͡୭⇾ Senha: ${anu.password}
    *◍₊ิ۪͡୭⇾ CEP: ${anu.zip_code}`
-                   h0nda.sendMessage(from, dadosf, text, {
+                    tiringa.sendMessage(from, dadosf, text, {
                         quoted: mek
                     })
                     addFilter(from)
@@ -4077,13 +4176,13 @@ e subir de nível
                         reply(ptbr.wait())
                         addFilter(from)
                         mitri = mek
-                        duh = await h0nda.downloadAndSaveMediaMessage(mitri)
+                        duh = await tiringa.downloadAndSaveMediaMessage(mitri)
                         ran = getRandom('.mp3')
                         exec(`ffmpeg -i ${duh} ${ran}`, (err) => {
                             fs.unlinkSync(duh)
                             if (err) return reply('❌falha ao converter video para mp3❌')
                             buffer = fs.readFileSync(ran)
-                            h0nda.sendMessage(from, buffer, audio, {
+                            tiringa.sendMessage(from, buffer, audio, {
                                 mimetype: 'audio/mp4',
                                 quoted: mek
                             })
@@ -4096,11 +4195,11 @@ e subir de nível
 
                     //_BLOQUEIA O USUÁRIO
                 case 'block':
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (!isGroup) return reply(ptbr.group())
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
-                    h0nda.blockUser(`${body.slice(8)}@c.us`, "add")
-                    h0nda.sendMessage(from, `Usuário bloqueado`, text, {
+                    tiringa.blockUser(`${body.slice(8)}@c.us`, "add")
+                    tiringa.sendMessage(from, `Usuário bloqueado`, text, {
                         quoted: mek
                     })
                     break
@@ -4109,14 +4208,14 @@ e subir de nível
                 case 'unblock':
                     if (!isGroup) return reply(ptbr.group())
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
-                    h0nda.blockUser(`${body.slice(9)}@c.us`, "remove")
-                    h0nda.sendMessage(from, `Usuário desbloqueado`, text)
+                    tiringa.blockUser(`${body.slice(9)}@c.us`, "remove")
+                    tiringa.sendMessage(from, `Usuário desbloqueado`, text)
                     break
 
                     //_MENCIONA TODOS OS MEMBROS DO GRUPO
                 case 'tagall':
                     addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                         //reply('comando desativado para evitar flood')
                     if (!isGroup) return reply(ptbr.group())
                         //if (!isPremium) return reply('Você não é um usuário premium...')
@@ -4137,8 +4236,8 @@ e subir de nível
                     if (!isGroupAdmins) return reply(ptbr.admin())
                     if (!isBotGroupAdmins) return reply(ptbr.Badmin())
                     idgrup = `${from.split("@s.whatsapp.net")[0]}`;
-                    h0nda.groupUpdateSubject(idgrup, `${body.slice(9)}`)
-                    h0nda.sendMessage(from, 'nome do grupo alterado', text, {
+                    tiringa.groupUpdateSubject(idgrup, `${body.slice(9)}`)
+                    tiringa.sendMessage(from, 'nome do grupo alterado', text, {
                         quoted: mek
                     })
                     break
@@ -4148,8 +4247,8 @@ e subir de nível
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
                     if (!isBotGroupAdmins) return reply(ptbr.Badmin())
-                    h0nda.groupUpdateDescription(from, `${body.slice(9)}`)
-                    h0nda.sendMessage(from, 'descrição do grupo alterada', text, {
+                    tiringa.groupUpdateDescription(from, `${body.slice(9)}`)
+                    tiringa.sendMessage(from, 'descrição do grupo alterada', text, {
                         quoted: mek
                     })
                     break
@@ -4170,11 +4269,11 @@ e subir de nível
 
                     //_ALTERA A FOTO DE PERFIL DO BOT
                 case 'setppbot':
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
                     const botpp = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contxtInfo : mek
-                    const cuk = await h0nda.downloadAndSaveMediaMessage(botpp)
-                    await h0nda.updateProfilePicture(botNumber, cuk)
+                    const cuk = await tiringa.downloadAndSaveMediaMessage(botpp)
+                    await tiringa.updateProfilePicture(botNumber, cuk)
                     reply('Obrigado pela nova foto de perfil')
                     break
 
@@ -4184,7 +4283,7 @@ e subir de nível
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
                     if (!isBotGroupAdmins) return reply(ptbr.Badmin())
-                    linkgc = await h0nda.groupInviteCode(from)
+                    linkgc = await tiringa.groupInviteCode(from)
                     reply('Link do grupo: https://chat.whatsapp.com/' + linkgc)
                     break
 
@@ -4192,7 +4291,7 @@ e subir de nível
                 case 'leave':
                     if (!isGroup) return reply(ptbr.group())
                     if (isGroupAdmins || isOwner) {
-                        h0nda.groupLeave(from)
+                        tiringa.groupLeave(from)
                     } else {
                         reply(ptbr.admin())
                     }
@@ -4200,11 +4299,11 @@ e subir de nível
 
                     //_MENCIONA TODOS OS MEMBROS DO GRUPO 
                 case 'hidetag':
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
                     if (!isGroup) return reply(ptbr.group())
                     htg = body.slice(9)
-                    group = await h0nda.groupMetadata(from);
+                    group = await tiringa.groupMetadata(from);
                     member = group['participants']
                     jids = [];
                     member.map(async adm => {
@@ -4217,23 +4316,23 @@ e subir de nível
                         },
                         quoted: mek
                     }
-                    await h0nda.sendMessage(from, options, text)
+                    await tiringa.sendMessage(from, options, text)
                     break
 
                     //_CONVERTE STICKER EM IMAGEM
                 case 'toimg':
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (!isQuotedSticker) return reply('Você precisa marcar um sticker não animado para isso')
                     reply(ptbr.wait())
                     addFilter(from)
                     tomg = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    medtmg = await h0nda.downloadAndSaveMediaMessage(tomg)
+                    medtmg = await tiringa.downloadAndSaveMediaMessage(tomg)
                     ran = getRandom('.png')
                     exec(`ffmpeg -i ${medtmg} ${ran}`, (err) => {
                         fs.unlinkSync(medtmg)
                         if (err) return reply('❌falha ao converter sticker em imagem❌')
                         buffer = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, buffer, image, {
+                        tiringa.sendMessage(from, buffer, image, {
                             quoted: mek,
                             caption: '✅'
                         })
@@ -4258,7 +4357,7 @@ e subir de nível
                     if (umurUser < 12) return reply(`Idade mínima é 12 anos`)
                     veri = sender
                     try {
-                        ppimg = await h0nda.getProfilePicture(`${sender.split('@')[0]}@s.whatsapp.net`)
+                        ppimg = await tiringa.getProfilePicture(`${sender.split('@')[0]}@s.whatsapp.net`)
                     } catch {
                         ppimg = 'https://i.ibb.co/rxPtZS8/foto.jpg'
                     }
@@ -4277,7 +4376,7 @@ e subir de nível
 você se registrou, digite ${prefix}menu para listar meus comandos`
                     daftarimg = await getBuffer(ppimg)
                     addRegisteredUser(sender, namaUser, umurUser, time, serialUser)
-                    h0nda.sendMessage(from, captionnya, text, {
+                    tiringa.sendMessage(from, captionnya, text, {
                         quoted: mek,
                         contextInfo: {
                             mentionedJid: [sender]
@@ -4287,7 +4386,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
 
                     //_FECHA O GRUPO
                 case 'fecharg':
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
                     if (!isBotGroupAdmins) return reply(ptbr.Badmin())
@@ -4298,7 +4397,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                             mentionedJid: [nomor]
                         }
                     }
-                    h0nda.groupSettingChange(from, GroupSettingChange.messageSend, true);
+                    tiringa.groupSettingChange(from, GroupSettingChange.messageSend, true);
                     reply(close)
                     break
 
@@ -4308,7 +4407,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     cp3 = `${Math.floor(Math.random() * 300) + 600}`
                     cp4 = `${Math.floor(Math.random() * 30) + 60}`
                     cpf = `${cp1}.${cp2}.${cp3}-${cp4}`
-                    h0nda.sendMessage(from, `CPF gerado: ${cpf}`, text, {
+                    tiringa.sendMessage(from, `CPF gerado: ${cpf}`, text, {
                         quoted: mek
                     })
                     addFilter(from)
@@ -4317,7 +4416,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     //_ABRE O GRUPO
                 case 'openg':
                 case 'abrirg':
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
                     if (!isBotGroupAdmins) return reply(ptbr.Badmin())
@@ -4327,8 +4426,8 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                             mentionedJid: [sender]
                         }
                     }
-                    h0nda.groupSettingChange(from, GroupSettingChange.messageSend, false)
-                    h0nda.sendMessage(from, open, text, {
+                    tiringa.groupSettingChange(from, GroupSettingChange.messageSend, false)
+                    tiringa.sendMessage(from, open, text, {
                         quoted: mek
                     })
                     break
@@ -4341,7 +4440,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
                     try {
-                        h0nda.deleteMessage(from, {
+                        tiringa.deleteMessage(from, {
                             id: mek.message.extendedTextMessage.contextInfo.stanzaId,
                             remoteJid: from,
                             fromMe: true
@@ -4364,9 +4463,9 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                         notify
                     } = groupMembers.find(x => x.jid === mentioned)
                     try {
-                        pp = await h0nda.getProfilePicture(id)
+                        pp = await tiringa.getProfilePicture(id)
                         buffer = await getBuffer(pp)
-                        h0nda.updateProfilePicture(botNumber, buffer)
+                        tiringa.updateProfilePicture(botNumber, buffer)
                         mentions(`Roubei a foto de perfil de: @${id.split('@')[0]}`, [jid], true)
                     } catch (e) {
                         reply('ocorreu um erro')
@@ -4377,9 +4476,9 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         const ncmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        filePath = await h0nda.downloadAndSaveMediaMessage(ncmedia, filename = getRandom())
+                        filePath = await tiringa.downloadAndSaveMediaMessage(ncmedia, filename = getRandom())
                         var value = args.join(" ")
-                        var group = await h0nda.groupMetadata(from)
+                        var group = await tiringa.groupMetadata(from)
                         var member = group['participants']
                         var mem = []
                         member.map(async adm => {
@@ -4392,7 +4491,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                             quoted: mek
                         }
                         ini_buffer = fs.readFileSync(filePath)
-                        h0nda.sendMessage(from, ini_buffer, image, options)
+                        tiringa.sendMessage(from, ini_buffer, image, options)
                         fs.unlinkSync(filePath)
                     } else {
                         reply(`Marque uma imagem para que eu mencione todos com ela`)
@@ -4403,9 +4502,9 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
                     if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
                         const enmedia = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        filePath = await h0nda.downloadAndSaveMediaMessage(enmedia, filename = getRandom())
+                        filePath = await tiringa.downloadAndSaveMediaMessage(enmedia, filename = getRandom())
                         var value = args.join(" ")
-                        var group = await h0nda.groupMetadata(from)
+                        var group = await tiringa.groupMetadata(from)
                         var member = group['participants']
                         var mem = []
                         member.map(async adm => {
@@ -4418,7 +4517,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                             quoted: mek
                         }
                         ini_buffer = fs.readFileSync(filePath)
-                        h0nda.sendMessage(from, ini_buffer, sticker, options)
+                        tiringa.sendMessage(from, ini_buffer, sticker, options)
                         fs.unlinkSync(filePath)
                     } else {
                         reply(`Marque um sticker para que eu mencione todos com ele`)
@@ -4431,7 +4530,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     reply(ptbr.wait())
                     addFilter(from)
                     asu = await getBuffer(`https://api.zeks.xyz/api/hartatahta?text=${dapuhy}&apikey=${ZeksKey}`)
-                    h0nda.sendMessage(from, asu, image, {
+                    tiringa.sendMessage(from, asu, image, {
                         quoted: mek
                     })
                     break
@@ -4446,10 +4545,10 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     var imgbb = require('imgbb-uploader')
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                          anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         nikhmmp = await getBuffer(`http://zekais-api.herokuapp.com/${command}?url=${anu.display_url}`)
-                        h0nda.sendMessage(from, nikhmmp, image, {
+                        tiringa.sendMessage(from, nikhmmp, image, {
                             quoted: mek
                         })
                     } else {
@@ -4463,10 +4562,10 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('Siap Boss')
                     mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid[0]
                     try {
-                        pp = await h0nda.getProfilePicture(mentioned)
+                        pp = await tiringa.getProfilePicture(mentioned)
                         buffer = await getBuffer(pp)
 
-                        h0nda.sendMessage(from, buffer, image, {
+                        tiringa.sendMessage(from, buffer, image, {
                             quoted: mek,
                             contextInfo: {
                                 "forwardingScore": 999,
@@ -4474,7 +4573,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                             }
                         })
                     } catch (err) {
-                        h0nda.sendMessage(from, buffer, image, {
+                        tiringa.sendMessage(from, buffer, image, {
                             quoted: mek,
                             contextInfo: {
                                 "forwardingScore": 999,
@@ -4487,13 +4586,13 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                 case 'imut':
                 addFilter(from)
                     enncmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    mmedia = await h0nda.downloadAndSaveMediaMessage(enncmedia)
+                    mmedia = await tiringa.downloadAndSaveMediaMessage(enncmedia)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${mmedia} -af atempo=3/4,asetrate=44500*4/3 ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(mmedia)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -4505,13 +4604,13 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                 case 'hode':
                 addFilter(from)
                     encmmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-                    mehdia = await h0nda.downloadAndSaveMediaMessage(encmmedia)
+                    mehdia = await tiringa.downloadAndSaveMediaMessage(encmmedia)
                     ran = getRandom('.mp3')
                     exec(`ffmpeg -i ${mehdia} -af atempo=4/3,asetrate=44500*3/4 ${ran}`, (err, stderr, stdout) => {
                         fs.unlinkSync(mehdia)
                         if (err) return reply('Error!')
                         hah = fs.readFileSync(ran)
-                        h0nda.sendMessage(from, hah, audio, {
+                        tiringa.sendMessage(from, hah, audio, {
                             mimetype: 'audio/mp4',
                             ptt: true,
                             quoted: mek
@@ -4525,11 +4624,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(14)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/facebookprof/?urlgbr=${anu.display_url}&text=${tels}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -4542,11 +4641,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(14)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/customwp/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -4559,11 +4658,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(14)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/nightbeach/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -4576,11 +4675,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(14)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/pencil/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -4593,11 +4692,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(7)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/burneffect/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -4610,11 +4709,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(7)
                         anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
                         hehe = await getBuffer(`https://videfikri.com/api/textmaker/crossgun/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehe, image, {
+                        tiringa.sendMessage(from, hehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -4627,11 +4726,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(7)
                         anu = await imgbb("08579d070df9a07cb1c2ee565aece767", owgi)
                         dhehe = await getBuffer(`https://videfikri.com/api/textmaker/customwp/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, dhehe, image, {
+                        tiringa.sendMessage(from, dhehe, image, {
                             quoted: mek
                         })
                     } else {
@@ -4644,11 +4743,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(7)
                         anu = await imgbb("08579d070df9a07cb1c2ee565aece767", owgi)
                         hehet = await getBuffer(`https://videfikri.com/api/textmaker/3dlinephoto/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehet, image, {
+                        tiringa.sendMessage(from, hehet, image, {
                             quoted: mek
                         })
                     } else {
@@ -4661,11 +4760,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(7)
                         anu = await imgbb("08579d070df9a07cb1c2ee565aece767", owgi)
                         hehre = await getBuffer(`https://videfikri.com/api/textmaker/raindrop/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehre, image, {
+                        tiringa.sendMessage(from, hehre, image, {
                             quoted: mek
                         })
                     } else {
@@ -4678,11 +4777,11 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                         ted = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         reply(ptbr.wait())
-                        owgi = await h0nda.downloadAndSaveMediaMessage(ted)
+                        owgi = await tiringa.downloadAndSaveMediaMessage(ted)
                         tels = body.slice(7)
                         anu = await imgbb("08579d070df9a07cb1c2ee565aece767", owgi)
                         hehae = await getBuffer(`https://videfikri.com/api/textmaker/pencil/?urlgbr=${anu.display_url}`)
-                        h0nda.sendMessage(from, hehae, image, {
+                        tiringa.sendMessage(from, hehae, image, {
                             quoted: mek
                         })
                     } else {
@@ -4693,7 +4792,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
               case 'return':
                     if (!isOwner) return reply(ptbr.ownerB(ownerName))
                     arguss = body.slice(8)
-                    return h0nda.sendMessage(from, JSON.stringify(eval(arguss)), text, {
+                    return tiringa.sendMessage(from, JSON.stringify(eval(arguss)), text, {
                         quoted: mek
                     })
                     break
@@ -4714,42 +4813,42 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                         }
                     }
                     exec(cmd, (err, stdout) => {
-                        if (err) return h0nda.sendMessage(from, `EXEC ${err}`, text, {
+                        if (err) return tiringa.sendMessage(from, `EXEC ${err}`, text, {
                             quoted: mek
                         })
                         if (stdout) {
-                            h0nda.sendMessage(from, stdout, text, term)
+                            tiringa.sendMessage(from, stdout, text, term)
                         }
                     })
                     break
 
                 case 'upswtext':
                 if (!isOwner) return reply(ptbr.ownerB(ownerName))
-                    h0nda.updatePresence(from, Presence.composing)
-                    h0nda.sendMessage('status@broadcast', `${q}`, extendedText)
-                    h0nda.sendMessage(from, `Texto enviado ao status: ${q}`, text, {
+                    tiringa.updatePresence(from, Presence.composing)
+                    tiringa.sendMessage('status@broadcast', `${q}`, extendedText)
+                    tiringa.sendMessage(from, `Texto enviado ao status: ${q}`, text, {
                         quoted: mek
                     })
                     break
 
                 case 'upswimg':
                 if (!isOwner) return reply(ptbr.ownerB(ownerName))
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (isQuotedImage) {
                         const swsw = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        cihcih = await h0nda.downloadMediaMessage(swsw)
-                        h0nda.sendMessage('status@broadcast', cihcih, image, {
+                        cihcih = await tiringa.downloadMediaMessage(swsw)
+                        tiringa.sendMessage('status@broadcast', cihcih, image, {
                             caption: `${q}`
                         })
                     }
                     if (args.length < 1) {
                         bur = `Imagem enviada ao status`
-                        h0nda.sendMessage(from, bur, text, {
+                        tiringa.sendMessage(from, bur, text, {
                             quoted: mek
                         })
                     } else {
                         bur = `Imagem enviada ao status com a legenda: ${q}`
-                        h0nda.sendMessage(from, bur, text, {
+                        tiringa.sendMessage(from, bur, text, {
                             quoted: mek
                         })
                     }
@@ -4757,22 +4856,22 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
 
                 case 'upswvideo':
                 if (!isOwner) return reply(ptbr.ownerB(ownerName))
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     if (isQuotedVideo) {
                         const swsw = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-                        cihcih = await h0nda.downloadMediaMessage(swsw)
-                        h0nda.sendMessage('status@broadcast', cihcih, video, {
+                        cihcih = await tiringa.downloadMediaMessage(swsw)
+                        tiringa.sendMessage('status@broadcast', cihcih, video, {
                             caption: `${q}`
                         })
                     }
                     if (args.length < 1) {
                         bur = `Vídeo enviado ao status`
-                        h0nda.sendMessage(from, bur, text, {
+                        tiringa.sendMessage(from, bur, text, {
                             quoted: mek
                         })
                     } else {
                         bur = `Vídeo enviado ao status com a legenda: ${q}`
-                        h0nda.sendMessage(from, bur, text, {
+                        tiringa.sendMessage(from, bur, text, {
                             quoted: mek
                         })
                     }
@@ -4780,7 +4879,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
 
                 case 'nicks':
                 addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     data = await fetchJson(`https://api.zeks.xyz/api/nickepep?apikey=${ZeksKey}`, {
                         method: 'get'
                     })
@@ -4793,7 +4892,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
 
                 case 'fordward':
                 addFilter(from)
-                    h0nda.sendMessage(from, `${body.slice(10)}`, MessageType.text, {
+                    tiringa.sendMessage(from, `${body.slice(10)}`, MessageType.text, {
                         contextInfo: {
                             forwardingScore: 508,
                             isForwarded: true
@@ -4806,7 +4905,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     teks = body.slice(6)
                     if (args.length < 1) return
                     saying = teks
-                    h0nda.sendMessage(from, saying, text)
+                    tiringa.sendMessage(from, saying, text)
                     break
 
                     //mini games, rate, random
@@ -4815,7 +4914,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     const dadus = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
                     dadu = dadus[Math.floor(Math.random() * dadus.length)]
                     dador = fs.readFileSync('./database/dados/' + dadu + '.webp')
-                    h0nda.sendMessage(from, dador, sticker, {
+                    tiringa.sendMessage(from, dador, sticker, {
                         quoted: mek
                     })
                     break
@@ -4829,7 +4928,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     gg = fej
                     reply(`você conseguiu: ${fej}`)
                     cararoa = fs.readFileSync('./database/cara/' + fej + '.webp')
-                    h0nda.sendMessage(from, cararoa, sticker, {
+                    tiringa.sendMessage(from, cararoa, sticker, {
                         quoted: mek
                     })
                     break
@@ -4847,7 +4946,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     const sn = ['sim', 'não']
                     gosto = body.slice(4)
                     addFilter(from)
-                    if (args.length < 1) return h0nda.sendMessage(from, `Você deve fazer uma pergunta...\nExemplo: ${prefix}sn O Italu é um baiano preguiçoso?`, text, {
+                    if (args.length < 1) return tiringa.sendMessage(from, `Você deve fazer uma pergunta...\nExemplo: ${prefix}sn O Italu é um baiano preguiçoso?`, text, {
                         quoted: mek
                     })
                     const jawab = sn[Math.floor(Math.random() * (sn.length))]
@@ -4892,12 +4991,12 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                         var tes = "Vitória do jogador"
                     }
                     if (vit == "derrota") {
-                        var tes = "A vitória é do h0nda-BOT"
+                        var tes = "A vitória é do Tiringa-BOT"
                     }
                     if (vit == "empate") {
                         var tes = "O jogo terminou em empate"
                     }
-                    reply(`h0nda-BOT jogou: ${pptb}\nO jogador jogou: ${args}\n\n${tes}`)
+                    reply(`Tiringa-BOT jogou: ${pptb}\nO jogador jogou: ${args}\n\n${tes}`)
                     if (tes == "Vitória do jogador") {
                         reply(pph)
                     }
@@ -4933,7 +5032,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
                     const mem2 = ag[Math.floor(Math.random() * (ag.length))]
                     const mem1 = ag[Math.floor(Math.random() * (ag.length))]
                     casal = `@${mem1.jid.split('@')[0]}  teste @${mem2.jid.split('@')[0]}`
-                    h0nda.sendMessage(from, casal, text, {
+                    tiringa.sendMessage(from, casal, text, {
                         quoted: mek,
                         contextInfo: {
                             "mentionedJid": [ag]
@@ -4969,21 +5068,21 @@ ${vitr}`
                             reply(`Você ganhou ${ppg} em xp!!!`)
                         }, 1100)
                     }
-                    h0nda.sendMessage(from, slott, text, {
+                    tiringa.sendMessage(from, slott, text, {
                         quoted: mek
                     })
                     break
 
                 case 'chance':
                 addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     var avb = body.slice(7)
-                    if (args.length < 1) return h0nda.sendMessage(from, `Você precisa digitar da forma correta\nExemplo: ${prefix}chance do Italu ser um trouxa`, text, {
+                    if (args.length < 1) return tiringa.sendMessage(from, `Você precisa digitar da forma correta\nExemplo: ${prefix}chance do Italu ser um trouxa`, text, {
                         quoted: mek
                     })
                     random = `${Math.floor(Math.random() * 100)}`
                     hasil = `A chance ${body.slice(8)}\n\né de... ${random}%`
-                    h0nda.sendMessage(from, hasil, text, {
+                    tiringa.sendMessage(from, hasil, text, {
                         quoted: mek,
                         contextInfo: {
                             mentionedJid: [sender]
@@ -5031,7 +5130,7 @@ ${vitr}`
 
                 case 'gay':
                 addFilter(from)
-                    h0nda.updatePresence(from, Presence.composing)
+                    tiringa.updatePresence(from, Presence.composing)
                     random = `${Math.floor(Math.random() * 100)}`
                     boiola = random
                     if (boiola < 20) {
@@ -5115,16 +5214,16 @@ ${vitr}`
                     }
                     if (morte == "Tinha uma bala no tambor, POW!") {
                         setTimeout(() => {
-                            h0nda.sendMessage(from, figb, sticker, {
+                            tiringa.sendMessage(from, figb, sticker, {
                                 quoted: mek
                             })
                         }, 2100)
                     }
                     setTimeout(() => {
-                        h0nda.sendMessage(from, morte, text, {
+                        tiringa.sendMessage(from, morte, text, {
                             quoted: mek
                         })
-                        h0nda.groupRemove(sender)
+                        tiringa.groupRemove(sender)
                     }, 2300)
                     break
 
@@ -5145,7 +5244,7 @@ ${vitr}`
                   1 impostor remain   。　.
 　 　　。　　 　　　　ﾟ　　　.　      　　　.
 ,　　　　.                  .`
-                        //  h0nda.groupRemove(from, mentioned)
+                        //  tiringa.groupRemove(from, mentioned)
                     mentions(`${sus}`, mentioned, true)
                     break
 
@@ -5190,7 +5289,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5210,7 +5309,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5230,7 +5329,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, video, {
+                                        tiringa.sendMessage(from, buf, video, {
                                             quoted: mek,
                                             mimetype: 'video/gif'
                                         })
@@ -5251,7 +5350,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5270,7 +5369,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5290,7 +5389,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5309,7 +5408,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5329,7 +5428,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5349,7 +5448,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5369,7 +5468,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5389,7 +5488,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5409,7 +5508,7 @@ ${vitr}`
                         axios.get(`https://nekos.life/api/v2/img/kuni`).then((res) => {
                             imageToBase64(res.data.url).then((response) => {
                                 var buf = Buffer.from(response, 'base64');
-                                h0nda.sendMessage(from, buf, image, {
+                                tiringa.sendMessage(from, buf, image, {
                                     quoted: mek
                                 })
                             })
@@ -5430,7 +5529,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5451,7 +5550,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5472,7 +5571,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5494,7 +5593,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5515,7 +5614,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5536,7 +5635,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5557,7 +5656,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5578,7 +5677,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5599,7 +5698,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5620,7 +5719,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5641,7 +5740,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5662,7 +5761,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5683,7 +5782,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5704,7 +5803,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5725,7 +5824,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5746,7 +5845,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5767,7 +5866,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5788,7 +5887,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5809,7 +5908,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5830,7 +5929,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5852,7 +5951,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5873,7 +5972,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5894,7 +5993,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5915,7 +6014,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5936,7 +6035,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5957,7 +6056,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5978,7 +6077,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -5999,7 +6098,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -6020,7 +6119,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -6041,7 +6140,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -6062,7 +6161,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -6083,7 +6182,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -6104,7 +6203,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -6125,7 +6224,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.image, {
+                                        tiringa.sendMessage(from, buf, MessageType.image, {
                                             quoted: mek
                                         })
                                     })
@@ -6151,7 +6250,7 @@ ${vitr}`
                                         var buf = Buffer.from(ress, 'base64')
                                         a = webp2gifFile(buf)
                                         mp4 = getBuffer(a.result)
-                                        h0nda.sendMessage(from, mp4, MessageType.video, {
+                                        tiringa.sendMessage(from, mp4, MessageType.video, {
                                             mimetype: 'video/gif',
                                             filename: `stick.gif`,
                                             quoted: mek,
@@ -6175,7 +6274,7 @@ ${vitr}`
                                 .then(
                                     (ress) => {
                                         var buf = Buffer.from(ress, 'base64')
-                                        h0nda.sendMessage(from, buf, MessageType.video, {
+                                        tiringa.sendMessage(from, buf, MessageType.video, {
                                             mimetype: 'video/gif',
                                             filename: `stick.gif`,
                                             quoted: mek,
@@ -6197,7 +6296,7 @@ ${vitr}`
                             .then(
                                 (ress) => {
                                     var buf = Buffer.from(ress, 'base64')
-                                    h0nda.sendMessage(from, buf, MessageType.image, {
+                                    tiringa.sendMessage(from, buf, MessageType.image, {
                                         quoted: mek
                                     })
                                 })
@@ -6212,7 +6311,7 @@ ${vitr}`
                             .then(
                                 (ress) => {
                                     var buf = Buffer.from(ress, 'base64')
-                                    h0nda.sendMessage(from, buf, {
+                                    tiringa.sendMessage(from, buf, {
                                         quoted: mek,
                                         mimetype: 'video/gif'
                                     })
@@ -6231,7 +6330,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6242,7 +6341,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6253,7 +6352,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6264,7 +6363,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6275,7 +6374,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6286,7 +6385,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6297,7 +6396,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6308,7 +6407,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6319,7 +6418,7 @@ ${vitr}`
                                     .then(
                                         (ress) => {
                                             var buf = Buffer.from(ress, 'base64')
-                                            h0nda.sendMessage(from, buf, MessageType.image, {
+                                            tiringa.sendMessage(from, buf, MessageType.image, {
                                                 quoted: mek
                                             })
                                         })
@@ -6341,7 +6440,7 @@ ${vitr}`
                     if (isCmd) {
                         if (!mek.key.fromMe) {
                             hsl = `        ────────────────\nOi @${sender.split("@")[0]}!!\nO comando: ${prefix}${command} não existe\n\nTem certeza que digitou corretamente?🧙‍♂️\nUse ${prefix}menu para listar meus comandos\n        ────────────────`
-                            h0nda.sendMessage(from, hsl, text, {
+                            tiringa.sendMessage(from, hsl, text, {
                                 quoted: mek,
                                 contextInfo: {
                                     mentionedJid: [sender]
@@ -6354,7 +6453,7 @@ ${vitr}`
                             mentionedJid: [baino]
                         }
                     }
-                    h0nda.sendMessage(from, tamme, text)
+                    tiringa.sendMessage(from, tamme, text)
                         }
                     }
                  }
@@ -6382,7 +6481,7 @@ ${vitr}`
                                 dtt = `${muehe}`
                                 ranm = getRandom('.mp3')
                                 tsgf.save(ranm, dtt, function() {
-                                    h0nda.sendMessage(from, fs.readFileSync(ranm), audio, {
+                                    tiringa.sendMessage(from, fs.readFileSync(ranm), audio, {
                                         quoted: mek,
                                         mimetype: 'audio/mp4',
                                         ptt: true
@@ -6392,7 +6491,7 @@ ${vitr}`
                         }
                         if (isGroup && isMedia && isAuto && !mek.message.videoMessage || isQuotedImage) {
                             const encmedia = mek
-                            const media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                            const media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                             ran = getRandom('.webp')
                             await ffmpeg(`./${media}`)
                                 .input(media)
@@ -6405,7 +6504,7 @@ ${vitr}`
                                 .on('end', function() {
                                     console.log('Finish')
                                     buffer = fs.readFileSync(ran)
-                                    h0nda.sendMessage(from, buffer, sticker, {
+                                    tiringa.sendMessage(from, buffer, sticker, {
                                         quoted: mek
                                     })
                                 })
@@ -6416,7 +6515,7 @@ ${vitr}`
                         }
                         if ((isGroup && isMedia & isAuto && !mek.message.imageMessage || isQuotedVideo)) {
                             const encmedia = mek
-                            const media = await h0nda.downloadAndSaveMediaMessage(encmedia)
+                            const media = await tiringa.downloadAndSaveMediaMessage(encmedia)
                             if (Buffer.byteLength(media) >= 6186598.4) return
                             ran = getRandom('.webp')
                             await ffmpeg(`./${media}`)
@@ -6431,7 +6530,7 @@ ${vitr}`
                                 .on('end', function() {
                                     console.log('Finish')
                                     buff = fs.readFileSync(ran)
-                                    h0nda.sendMessage(from, buff, sticker)
+                                    tiringa.sendMessage(from, buff, sticker)
                                 })
                                 .addOutputOptions([`-vcodec`, `libwebp`, `-vf`, `crop=w='min(min(iw\,ih)\,650)':h='min(min(iw\,ih)\,650)',scale=320:320,setsar=1,fps=15`, `-loop`, `0`, `-ss`, `00:00:00.0`, `-t`, `00:00:10.0`, `-preset`, `default`, `-an`, `-vsync`, `0`, `-s`, `512:512`])
                                 .toFormat('webp')
